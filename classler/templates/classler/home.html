@@ -5,6 +5,7 @@
         <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
         <META HTTP-EQUIV="Expires" CONTENT="-1">
         {% load staticfiles %}
+        <script src="{% static 'classler/classler.js' %}" type="text/javascript"></script>
         <script src="{% static 'classler/lib/codemirror.js' %}" type="text/javascript"></script>
         <link rel="stylesheet" href="{% static 'classler/lib/codemirror.css' %}" type="text/css">
         <link rel="stylesheet" href="{% static 'classler/theme/3024-night.css' %}" type="text/css">
@@ -17,14 +18,17 @@
             This is the home page of Classler.
         </div>
         <div>
+        <!-- <form method="post" action="{% url 'submit_code' %}"> -->
         <div id="codeeditor" style="border-width: 2rem; border-color: black;"></div>
         <script>
             var editor = CodeMirror(document.getElementById("codeeditor"), {
                 mode:"python",
-                theme:"3024-night"
+                theme:"3024-night",
             });
         </script>
-        <button type="submit">Submit</button>
+        <button type="submit" onclick="getCode(CodeMirror, editor)">Submit</button>
+    <!--         {% csrf_token %}
+        </form> -->
 
     </body>
 </html>

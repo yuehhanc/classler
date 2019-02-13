@@ -1,15 +1,19 @@
 code = "";
 function getCode(CodeMirror, editor) {
-    console.log(editor.getValue());
-    code = editor.getValue();
-    var req = new XMLHttpRequest();
-    req.onreadystatechange = function() {
-        if (req.readyState != 4) return;
-        if (req.status != 200) return;
-    }
-    req.open("POST", "/classler/submit_code", true);
-    req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    req.send("code="+code+"&csrfmiddlewaretoken="+getCSRFToken());
+	var code = editor.getValue();
+	$.ajax({
+		url: '/classler/submit_code',
+		data: {
+			'code': code
+		},
+		dataType: 'json',
+		success: function(data) {
+			var ans = data.result.replace(/\n/g,"<br>");
+			$('#output').empty();
+			$('#output').append("<div class=\"col\"><span>"+ans+"</span><\/div>");
+			$('#answer').show();
+		}
+	});
 }
 
 function getCSRFToken() {

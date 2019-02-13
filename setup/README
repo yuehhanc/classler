@@ -1,0 +1,9 @@
+1. Install docker image
+* Run "docker build -t test ." in the same directory with Dockerfile and ubuntu-bionic-core-cloudimg-amd64-root.tar.gz
+* This will create a docker image named test
+
+2. Put the python folder and start_docker.sh to your home folder
+
+3. Create container
+* Run create_docker.sh
+* Expect to see container named test after you enter "docker container ls --all"

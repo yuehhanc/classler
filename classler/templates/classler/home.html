@@ -41,21 +41,27 @@
             </div>
         </div>
         <!-- <form method="post" action="{% url 'submit_code' %}"> -->
-        <div class="container">
-            <div class="row border">
-                <div id="codeeditor"></div>
+            <div class="container">
+                <div class="row border">
+                    {% if result %}
+                        <div>{{ result }}</div>
+                    {% else %}
+                        <div id="codeeditor"></div>
+                    {% endif %}
+                </div>
+                <div class="row justify-content-end">
+                    <!-- <input class="btn btn-outline-primary mt-1" type="submit" value='Submit'> -->
+                    <button class="btn btn-outline-primary mt-1" type="button" onclick="getCode(CodeMirror, editor)">Submit</button>
+                </div>
             </div>
-            <div class="row justify-content-end">
-                <button class="btn btn-outline-primary mt-1" type="button" onclick="getCode(CodeMirror, editor)">Submit</button>
-            </div>
-        </div>
-        <script>
-            var editor = CodeMirror(document.getElementById("codeeditor"), {
-                lineNumbers: true,
-                mode:"python",
-            });
-        </script>
-    <!--         {% csrf_token %}
+            <script>
+                var editor = CodeMirror(document.getElementById("codeeditor"), {
+                    value: "def has_two_sum(nums, target):\n\treturn 42",
+                    lineNumbers: true,
+                    mode:"python",
+                });
+            </script>
+<!--             {% csrf_token %}
         </form> -->
 
     </body>

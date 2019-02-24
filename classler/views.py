@@ -14,13 +14,17 @@ def submit_code(request):
     data = {
             'result': 'Cannot get code'
             }
+    # Let the front send the name of a problem. We want to use it to find the matching file.
     if code != None:
 
-        with open('/home/ubuntu/python/solution/solution.py', 'w') as f:
+        pre_code = "from solution_framework.solution import Solution\nimport sys\n\n"
+        post_code = "\n\nif __name__ == '__main__':\n    sol = Solution(1, 0.1)\n    result = sol.run(two_sum)\n    sys.stdout.flush()"
+        full_code = pre_code + code + post_code
+        with open('/Users/roland/python/solution/two_sum.py', 'w') as f:
             solution = File(f)
-            solution.write(code)
-        subprocess.call("/home/ubuntu/start_docker.sh", shell=True)
-        with open('/home/ubuntu/python/answer.log', 'r') as f:
+            solution.write(full_code)
+        subprocess.call("/Users/roland/start_docker.sh", shell=True)
+        with open('/Users/roland/python/answer.log', 'r') as f:
             ans = ""
             for line in f:
                 ans += line

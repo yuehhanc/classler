@@ -46,6 +46,7 @@ RUN apt update
 RUN apt -y upgrade
 RUN apt-get -y install vim
 RUN apt-get -y install python
+RUN apt-get -y install python-futures
 RUN useradd -ms /bin/bash ubuntu
 USER ubuntu
 RUN mkdir /home/ubuntu/python

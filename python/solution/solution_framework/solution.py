@@ -37,11 +37,11 @@ class Solution:
         return self._timer
 
     def _timed_call(self, func, *args):
-        sys.stdout = open("/Users/roland/Desktop/Program_Development/classler/setup/python"+'/answer.log','w')
+        sys.stdout = open("/home/ubuntu/python"+'/answer.log','w')
         self._timer.start()
         result = func(*args)
         self._timer.stop()
-        # print("Your answer: " + str(result))
+        print("Your answer: " + str(result))
         print("Execution time: " + str(self._timer.get_microseconds()) + " ms")
         print(str(self._num_passed) + " tests passed")
         return result

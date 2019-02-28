@@ -8,7 +8,7 @@ def home(request):
     context = {}
     return render(request, 'classler/home.html', context)
 
-def submit_code(request):
+def submit_code(request, problem="two_sum"):
     context = {}
     code = request.GET.get('code')
     data = {

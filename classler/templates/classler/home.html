@@ -70,7 +70,7 @@
 		smartIndent:true,
 		indentWithTabs:true,
 		tabSize:4,
-		value: "class Solution():\n\tdef __init__(self):\n\t\tpass\n\tdef run(self):\n",
+		value: "def two_sum(nums, target):\n\tleft = 0\n\tright = len(nums) - 1\n\tnums.sort()\n\twhile left < right:\n\t\ttotal = nums[left] + nums[right]\n\t\tif target < total:\n\t\t\tright -= 1\n\t\telif target > total:\n\t\t\tleft += 1\n\t\telse:\n\t\t\treturn True\n\treturn False",
             });
         </script>
     <!--         {% csrf_token %}

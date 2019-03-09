@@ -61,7 +61,7 @@ def submit_code(request, problem="two_sum"):
             for line in f:
                 ans += line
             data['result'] = ans
-        #shutil.rmtree(solution)
+        shutil.rmtree(solution)
 
     return JsonResponse(data)
 

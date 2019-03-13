@@ -1,0 +1,33 @@
+
+  .card-deck .card {
+    min-width: 220px;
+  }
+  
+  .my-0 {
+    color: black;
+  }
+  
+  li {
+    position: relative;
+    cursor: pointer;
+    background-color: #EEE;
+    color: black;
+    margin: .5em;
+    padding: .3em 0;
+    height: 2em;
+    font-size: 1.5em;
+    border-radius: 4px;
+  }
+   
+  li:hover {
+    color: #607D8B;
+    background-color: #DDD;
+    left: .1em;
+  }
+  
+  
+  .card-body {
+    height:50vh;
+    overflow-y:scroll;
+    width:100%;
+  }

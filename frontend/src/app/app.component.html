@@ -1,0 +1,35 @@
+<body class="text-center">
+
+  <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+    <header class="masthead mb-auto">
+      <div class="inner">
+        <h3 class="masthead-brand" routerLink="/">{{ title }}</h3>
+        <nav class="nav nav-masthead justify-content-center">
+          <a class="nav-link" routerLink="/">Home</a>
+          <a class="nav-link" routerLink="/courses">Courses</a>
+          <a class="nav-link" routerLink="/problems">Problems</a>
+          <a class="nav-link" routerLink="/interview">Interview</a>
+          <a class="nav-link"> Login </a>
+        </nav>
+      </div>
+    </header>
+
+
+
+    <router-outlet></router-outlet>
+
+    <footer class="mastfoot mt-auto">
+      <div class="inner">
+        <p>
+          <a routerLink="/">Blog</a> |
+          <a routerLink="/">About Us</a> |
+          <a routerLink="/">FAQ</a> |
+          <a routerLink="/">Contact Us</a> |
+          <a routerLink="/">Terms</a> |
+          <a routerLink="/">Privacy Policy</a>
+        </p>
+      </div>
+    </footer>
+  </div>
+
+</body>

@@ -1,0 +1,19 @@
+<h2> Problems </h2>
+<div>
+  <label>
+    <input (keyup)="onKey($event)" placeholder="Search problem titles or IDs" />
+  </label>
+</div>
+
+<ul class="topics">
+  <li *ngFor="let item of selectedProblems">
+    <a routerLink="/problems/{{item.name}}">
+      <span class="badge">{{item.id}}</span> {{item.name}}
+    </a>
+
+  </li>
+</ul>
+
+<div *ngIf="noMatched">
+  <h4>Can't find any matched problem...</h4>
+</div>

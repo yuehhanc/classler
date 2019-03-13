@@ -1,0 +1,18 @@
+<div *ngIf="selectedProblem">
+  <h2>{{selectedProblem.info.id}}. {{selectedProblem.info.name}}</h2>
+  <div [innerHTML]="selectedProblem.description" align=left style="width: 600px"></div>
+
+  <h4>Code:</h4>
+  <div class="ngx-codemirror mb-1" align=left style="width: 700px">
+    <ngx-codemirror [ngModel]="options.value" [options]="options" [autoFocus]=false [preserveScrollPosition]=true
+      (ngModelChange)="handleChange($event)"></ngx-codemirror>
+  </div>
+  <div>
+    <button (click)="submit()">Submit</button>
+  </div>
+  <div *ngIf="userCode">
+    <h4>Result</h4>
+    <p>{{submitResult}}</p>
+  </div>
+
+</div>

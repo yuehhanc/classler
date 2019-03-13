@@ -1,3 +1,8 @@
+# compiled output
 *.pyc
 
+# DS
 *.DS_Store
+
+# cache
+./classler/__pycache__

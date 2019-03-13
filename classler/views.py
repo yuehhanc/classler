@@ -3,6 +3,19 @@ from django.http import JsonResponse
 from django.core.files import File
 import subprocess
 
+from django.contrib.auth.models import User, Group
+from rest_framework import viewsets
+from .serializers import CourseSerializer
+from .models import Course
+
+
+class CourseViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows users to be viewed or edited.
+    """
+    queryset = Course.objects.all()
+    serializer_class = CourseSerializer
+
 # Create your views here.
 def home(request):
     context = {}
@@ -20,7 +33,7 @@ def submit_code(request, problem="two_sum"):
         pre_code = "from solution_framework.solution import Solution\nimport sys\n\n"
         post_code = "\n\nif __name__ == '__main__':\n    sol = Solution(1, 0.1)\n    result = sol.run(two_sum)\n    sys.stdout.flush()"
         full_code = pre_code + code + post_code
-        with open('/Users/roland/python/solution/two_sum.py', 'w') as f:
+        with open('/Users/roland/python/solution/'+problem+'.py', 'w') as f:
             solution = File(f)
             solution.write(full_code)
         subprocess.call("/Users/roland/start_docker.sh", shell=True)

@@ -1,1 +1,1 @@
-docker create -v /Users/roland/python:/home/ubuntu/python --name test test
+docker create -v /home/ubuntu/python:/home/ubuntu/python --name test test

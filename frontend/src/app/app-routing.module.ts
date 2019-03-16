@@ -7,7 +7,7 @@ import { ProblemViewComponent } from './problem-view/problem-view.component';
 import { ProblemDetailViewComponent } from './problem-detail-view/problem-detail-view.component';
 import { InterviewViewComponent } from './interview-view/interview-view.component';
 import { AdsViewComponent } from './ads-view/ads-view.component';
-import { ArraysComponent } from './arrays/arrays.component';
+import { CourseDetailViewComponent } from './course-detail-view/course-detail-view.component';
 
 const routes: Routes = [
   { path: 'courses', component: CourseViewComponent },
@@ -15,7 +15,7 @@ const routes: Routes = [
   { path: '', component: AdsViewComponent },
   { path: 'interview', component: InterviewViewComponent },
   { path: 'problems/:name', component: ProblemDetailViewComponent},
-  { path: 'arrays', component:ArraysComponent },
+  { path: 'courses/:id', component:CourseDetailViewComponent},
 ];
  
 

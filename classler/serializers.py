@@ -7,3 +7,8 @@ class CourseSerializer(serializers.ModelSerializer):
     class Meta:
         model = Course
         fields = ('id', 'topic', 'content', 'link')
+
+class CourseMiniSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Course
+        fields = ('id', 'topic')

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../api.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-course-view',
@@ -12,7 +13,7 @@ export class CourseViewComponent implements OnInit {
 
   courses = [{topic: "topic1", content: "", link: "/"}];
 
-  constructor(private api:ApiService) {
+  constructor(private api: ApiService, private router: Router) {
     this.getCourses();
   }
 
@@ -26,6 +27,18 @@ export class CourseViewComponent implements OnInit {
       }
 
     )
+  }
+
+  courseClicked = (course) => {
+    this.api.getOneCourse(course.id).subscribe(
+      data => {
+        this.router.navigate(['courses/' + course.id]);
+      },
+      error => {
+        console.log(error);
+      }
+
+    )  
   }
 
   ngOnInit() {

@@ -15,4 +15,10 @@ export class ApiService {
     return this.http.get(this.baseUrl + "/courses/",
     {headers: this.httpHeaders});
   }
+
+  getOneCourse(id): Observable<any> {
+    return this.http.get(this.baseUrl + "/courses/" + id + "/",
+    {headers: this.httpHeaders});
+  }
+
 }

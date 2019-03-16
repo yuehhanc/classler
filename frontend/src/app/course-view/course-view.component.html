@@ -23,8 +23,8 @@
       </div>
       <div class="card-body">
         <ul class="list-unstyled mt-3 mb-4">
-          <li *ngFor = 'let course of courses'>
-            <a routerLink="{{course.link}}">{{course.topic}}</a>
+          <li *ngFor = 'let course of courses' (click)="courseClicked(course)">
+            {{course.topic}}
           </li>
         </ul>
       </div>

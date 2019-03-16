@@ -23,7 +23,7 @@ import { CodeSubmissionService } from './code-submission.service';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ArraysComponent } from './arrays/arrays.component';
+import { CourseDetailViewComponent } from './course-detail-view/course-detail-view.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +35,7 @@ import { ArraysComponent } from './arrays/arrays.component';
     SignupPopupComponent,
     LoginPopupComponent,
     ProblemDetailViewComponent,
-    ArraysComponent
+    CourseDetailViewComponent,
   ],
   imports: [
     BrowserModule,

@@ -9,8 +9,10 @@ import shutil
 
 from django.contrib.auth.models import User, Group
 from rest_framework import viewsets
-from .serializers import CourseSerializer
+from .serializers import CourseSerializer, CourseMiniSerializer
 from .models import Course
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
 
 
 class CourseViewSet(viewsets.ModelViewSet):
@@ -19,6 +21,12 @@ class CourseViewSet(viewsets.ModelViewSet):
     """
     queryset = Course.objects.all()
     serializer_class = CourseSerializer
+
+    def list(self, request, *arg, **kwargs):
+        courses = Course.objects.all()
+        serializer = CourseMiniSerializer(courses, many=True)
+        return Response(serializer.data)
+
 
 # Create your views here.
 def home(request):
@@ -49,6 +57,7 @@ def submit_code_demo(request, problem="two_sum"):
 
     return JsonResponse(data)
 
+@api_view(['GET', 'POST'])
 def submit_code(request, problem="two_sum"):
     context = {}
     code = request.GET.get('code')
@@ -69,6 +78,7 @@ def submit_code(request, problem="two_sum"):
         # docker run --rm --volumes-from test test cp /$HOME/python/$TIME/two_sum.py /$HOME/python/solution/ && python /$HOME/python/solution/two_sum.py $TIME
         cmd = "docker run --rm --volumes-from test test cp " + solution + "/two_sum.py " + root + "solution/ && python " + root + "solution/two_sum.py " + solution
         subprocess.call(cmd, shell=True)
+        # solution = "/Users/roland/python" # Testing
         with open(solution + '/answer.log', 'r') as f:
             ans = ""
             for line in f:
@@ -76,7 +86,38 @@ def submit_code(request, problem="two_sum"):
             data['result'] = ans
         shutil.rmtree(solution)
 
-    return JsonResponse(data)
+    return Response(data)
+
+@api_view(['GET', 'POST'])
+def code_submit(request, problem_name):
+    context = {}
+    code = request.GET.get('code')
+    data = {
+            'result': 'Cannot get code'
+            }
+    # Let the front send the name of a problem. We want to use it to find the matching file.
+    if code != None:
+        root = str(Path.home()) + '/python/'
+        folder = current_milli_time()
+        solution = root + folder
+        os.makedirs(solution)
+        pre_code = "from solution_framework.solution import Solution\nimport sys\n\n"
+        post_code = "\n\nif __name__ == '__main__':\n    sol = Solution(1, sys.argv[1], 0.1)\n    result = sol.run(two_sum)\n    sys.stdout.flush()"
+        full_code = pre_code + code + post_code
+        with open(solution + '/two_sum.py', 'w') as f:
+            f.write(full_code)
+        # docker run --rm --volumes-from test test cp /$HOME/python/$TIME/two_sum.py /$HOME/python/solution/ && python /$HOME/python/solution/two_sum.py $TIME
+        cmd = "docker run --rm --volumes-from test test cp " + solution + "/two_sum.py " + root + "solution/ && python " + root + "solution/two_sum.py " + solution
+        subprocess.call(cmd, shell=True)
+        solution = "/Users/roland/python" # Testing
+        with open(solution + '/answer.log', 'r') as f:
+            ans = ""
+            for line in f:
+                ans += line
+            data['result'] = ans
+        shutil.rmtree(solution)
+
+    return Response(data)
 
 def compileCode(request):
     # Note

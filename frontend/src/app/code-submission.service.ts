@@ -19,18 +19,18 @@ export class CodeSubmissionService {
   constructor(private http: HttpClient, ) { }
 
 
-  //submit(problem_name: string, code_str: string): Observable<any> {
-  //  const body = {name: problem_name, code: code_str};
-  //  return this.http.post(this.baseUrl + "submit_code/", body, {headers: this.httpHeaders});  
-  //}
-
-  submit(problem_name: string, code_str: string): Observable<string> {
-    const submissionUrl = 'problems/' + problem_name + '/code-submit';
-    return this.http.post<string>(submissionUrl, code_str, httpOptions).pipe(
-      tap((result_str: string) => this.log(`my result: str=${result_str}`)),
-      catchError(this.handleError<string>('submit'))
-    );
+  submit(problem_name: string, code_str: string): Observable<any> {
+    const body = {name: problem_name, code: code_str};
+    return this.http.post(this.baseUrl + "problems/" + problem_name + "/code-submit", body, {headers: this.httpHeaders});  
   }
+
+  //submit(problem_name: string, code_str: string): Observable<string> {
+  //  const submissionUrl = 'problems/' + problem_name + '/code-submit';
+  //  return this.http.post<string>(submissionUrl, code_str, httpOptions).pipe(
+  //    tap((result_str: string) => this.log(`my result: str=${result_str}`)),
+  //    catchError(this.handleError<string>('submit'))
+  //  );
+  //}
 
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {

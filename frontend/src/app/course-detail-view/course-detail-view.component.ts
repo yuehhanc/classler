@@ -12,9 +12,12 @@ import { DomSanitizer } from '@angular/platform-browser';
 export class CourseDetailViewComponent implements OnInit {
 
   id = -1;
+  topic = "";
+  content = "";
+  link = "";
 
   constructor(private api: ApiService, private route: ActivatedRoute, private sanitizer: DomSanitizer) {
-    this.id = this.route.snapshot.paramMap.get('id');
+    this.id = parseInt(this.route.snapshot.paramMap.get('id'));
     this.sanitizer = sanitizer;
     console.log(this.id);
     this.api.getOneCourse(this.id).subscribe(

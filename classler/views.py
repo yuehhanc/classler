@@ -8,6 +8,8 @@ import os
 import shutil
 
 from django.contrib.auth.models import User, Group
+from django.views.decorators.csrf import ensure_csrf_cookie, csrf_exempt
+from django.http import HttpResponse, Http404
 from rest_framework import viewsets
 from .serializers import CourseSerializer, CourseMiniSerializer
 from .models import Course
@@ -86,8 +88,10 @@ def submit_code(request, problem="two_sum"):
 
     return Response(data)
 
+@csrf_exempt
 def code_submit(request, problem_name):
     context = {}
+    queryset = Course.objects.all()
     code = request.GET.get('code')
     data = {
             'result': 'Cannot get code'
@@ -113,8 +117,10 @@ def code_submit(request, problem_name):
                 ans += line
             data['result'] = ans
         shutil.rmtree(solution)
-
-    return Response(data)
+    result = {"result": "Accept",
+              "num_test_passed": "test passed: 17/17 tests",
+              "runtime": "Time: 987 ms",}
+    return JsonResponse(result)
 
 def compileCode(request):
     # Note

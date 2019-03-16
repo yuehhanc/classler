@@ -57,7 +57,6 @@ def submit_code_demo(request, problem="two_sum"):
 
     return JsonResponse(data)
 
-@api_view(['GET', 'POST'])
 def submit_code(request, problem="two_sum"):
     context = {}
     code = request.GET.get('code')
@@ -78,7 +77,6 @@ def submit_code(request, problem="two_sum"):
         # docker run --rm --volumes-from test test cp /$HOME/python/$TIME/two_sum.py /$HOME/python/solution/ && python /$HOME/python/solution/two_sum.py $TIME
         cmd = "docker run --rm --volumes-from test test cp " + solution + "/two_sum.py " + root + "solution/ && python " + root + "solution/two_sum.py " + solution
         subprocess.call(cmd, shell=True)
-        # solution = "/Users/roland/python" # Testing
         with open(solution + '/answer.log', 'r') as f:
             ans = ""
             for line in f:
@@ -88,7 +86,6 @@ def submit_code(request, problem="two_sum"):
 
     return Response(data)
 
-@api_view(['GET', 'POST'])
 def code_submit(request, problem_name):
     context = {}
     code = request.GET.get('code')

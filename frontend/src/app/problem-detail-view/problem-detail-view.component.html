@@ -1,18 +1,31 @@
 <div *ngIf="selectedProblem">
-  <h2>{{selectedProblem.info.id}}. {{selectedProblem.info.name}}</h2>
-  <div [innerHTML]="selectedProblem.description" align=left style="width: 600px"></div>
 
-  <h4>Code:</h4>
-  <div class="ngx-codemirror mb-1" align=left style="width: 700px">
-    <ngx-codemirror [ngModel]="options.value" [options]="options" [autoFocus]=false [preserveScrollPosition]=true
-      (ngModelChange)="handleChange($event)"></ngx-codemirror>
-  </div>
+  <h1>{{selectedProblem.info.id}}. {{selectedProblem.info.name}}</h1>
   <div>
-    <button (click)="submit()">Submit</button>
-  </div>
-  <div *ngIf="userCode">
-    <h4>Result</h4>
-    <p>{{submitResult}}</p>
+    <tabset>
+      <tab heading="Problem">
+        <div [innerHTML]="selectedProblem.description" align=left style="width: 600px"></div>
+        <h4>Code:</h4>
+        <div class="ngx-codemirror mb-1" align=left style="width: 700px">
+          <ngx-codemirror [ngModel]="options.value" [options]="options" [autoFocus]=false [preserveScrollPosition]=true
+            (ngModelChange)="handleChange($event)"></ngx-codemirror>
+        </div>
+        <div>
+          <button (click)="submit()">Submit</button>
+        </div>
+        <div *ngIf="userCode">
+          <h4>Result</h4>
+          <p>{{submitResult}}</p>
+        </div>
+      </tab>
+      <tab heading="Solution">Basic content 1</tab>
+      <tab heading="Video">
+        <iframe width="640" height="360" [src]="resource_url" frameborder="0"
+          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </tab>
+      <tab heading="Discussion">Basic content 2</tab>
+      <tab heading="History">Basic content 2</tab>
+    </tabset>
   </div>
 
 </div>

@@ -11,37 +11,25 @@ import { Router } from '@angular/router';
 
 export class CourseViewComponent implements OnInit {
 
-  courses = [{topic: "topic1", content: "", link: "/"}];
+  // id should be some sort of hash value created by the backend instead of just number
+  course_names = ["Data Structure Intro", "topic2", "topic3"]
 
   constructor(private api: ApiService, private router: Router) {
+  }
+
+  // async operation in init instead of constructor so nothing is blocked
+  ngOnInit() {
     this.getCourses();
   }
 
   getCourses = () => {
     this.api.getAllCourses().subscribe(
       data => {
-        this.courses = data;
+        this.course_names = data;
       },
       error => {
         console.log(error);
       }
-
     )
   }
-
-  courseClicked = (course) => {
-    this.api.getOneCourse(course.id).subscribe(
-      data => {
-        this.router.navigate(['courses/' + course.id]);
-      },
-      error => {
-        console.log(error);
-      }
-
-    )  
-  }
-
-  ngOnInit() {
-  }
-
 }

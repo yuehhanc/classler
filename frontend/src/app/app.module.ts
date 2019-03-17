@@ -25,6 +25,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CourseDetailViewComponent } from './course-detail-view/course-detail-view.component';
 
+import { CollapseModule } from 'ngx-bootstrap/collapse';
+import { TabsModule } from 'ngx-bootstrap/tabs';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,6 +47,8 @@ import { CourseDetailViewComponent } from './course-detail-view/course-detail-vi
     FormsModule,
     CodemirrorModule,
     HttpClientModule,
+    CollapseModule.forRoot(),
+    TabsModule.forRoot(),
   ],
   providers: [
     CourseService, 

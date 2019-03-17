@@ -1,47 +1,31 @@
-<!-- <h2> 
-  <p *ngFor="let item of pathStack" (click)=getCourse(item.path) style="display:inline">
-    {{item.name}} /
-  </p>
-</h2>
-
-<div *ngIf="selectedCourse.content">
-  <div [innerHTML]="selectedCourse.content" align=left style="width: 600px"></div>
-</div> 
-
-
-<ul class="topics">
-  <li *ngFor="let item of selectedCourse.subtopic; let i = index" (click)="onSelect(item)">
-    <span class="badge">{{i+1}}</span> {{item}}
-  </li>
-</ul> -->
-
 <div class="container">
   <div class="card-deck mb-3 text-center">
     <div class="card mb-4 shadow-sm">
       <div class="card-header">
-        <h4 class="my-0 font-weight-normal">Data Structure Intro</h4>
+        <h4 class="my-0 font-weight-normal">Course Topics</h4>
       </div>
       <div class="card-body">
         <ul class="list-unstyled mt-3 mb-4">
-          <li *ngFor = 'let course of courses' (click)="courseClicked(course)">
-            {{course.topic}}
+          <li *ngFor='let course of course_names'>
+            <div routerLink="/courses/{{course}}">
+              {{course}}
+            </div>
           </li>
         </ul>
       </div>
     </div>
-    <div class="card mb-4 shadow-sm">
+    <!-- <div class="card mb-4 shadow-sm">
       <div class="card-header">
         <h4 class="my-0 font-weight-normal">Problem Solving</h4>
       </div>
       <div class="card-body">
-        <h1 class="card-title pricing-card-title">$15 <small class="text-muted">/ mo</small></h1>
         <ul class="list-unstyled mt-3 mb-4">
-          <li>20 users included</li>
-          <li>10 GB of storage</li>
-          <li>Priority email support</li>
-          <li>Help center access</li>
+          <li *ngFor='let course of course_names'>
+            <div routerLink="/courses/{{course}}">
+              {{course}}
+            </div>
+          </li>
         </ul>
-        <button type="button" class="btn btn-lg btn-block btn-primary">Get started</button>
       </div>
-    </div>
+    </div> -->
   </div>

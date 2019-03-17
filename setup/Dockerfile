@@ -48,6 +48,7 @@ RUN apt-get -y install vim
 RUN apt-get -y install python
 RUN apt-get -y install python-futures
 RUN useradd -ms /bin/bash ubuntu
+RUN usermod -u 497 wsgi
 USER ubuntu
 RUN mkdir /home/ubuntu/python
 WORKDIR /home/ubuntu

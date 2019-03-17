@@ -30,7 +30,6 @@ class CourseViewSet(viewsets.ModelViewSet):
         serializer = CourseMiniSerializer(courses, many=True)
         return Response(serializer.data)
 
-
 # Create your views here.
 def home(request):
     context = {}
@@ -70,7 +69,10 @@ def submit_code(request, problem="two_sum"):
     if code != None:
         root = str(Path.home()) + '/python/'
         folder = current_milli_time()
+        DOCKER_ROOT = '/home/ubuntu/python/'
+        docker_solution = DOCKER_ROOT + folder
         solution = root + folder
+        print(getpass.getuser())
         os.makedirs(solution)
         pre_code = "from solution_framework.solution import Solution\nimport sys\n\n"
         post_code = "\n\nif __name__ == '__main__':\n    sol = Solution(1, sys.argv[1], 0.1)\n    result = sol.run(two_sum)\n    sys.stdout.flush()"
@@ -78,7 +80,7 @@ def submit_code(request, problem="two_sum"):
         with open(solution + '/two_sum.py', 'w') as f:
             f.write(full_code)
         # docker run --rm --volumes-from test test cp /$HOME/python/$TIME/two_sum.py /$HOME/python/solution/ && python /$HOME/python/solution/two_sum.py $TIME
-        cmd = "docker run --rm --volumes-from test test cp " + solution + "/two_sum.py " + root + "solution/ && python " + root + "solution/two_sum.py " + solution
+        cmd = 'docker run --rm --volumes-from test test /bin/bash -c "cp ' + docker_solution + '/two_sum.py ' + DOCKER_ROOT + 'solution/ && python ' + DOCKER_ROOT + 'solution/two_sum.py ' + docker_solution + '"'
         subprocess.call(cmd, shell=True)
         with open(solution + '/answer.log', 'r') as f:
             ans = ""

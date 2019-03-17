@@ -6,6 +6,7 @@ import subprocess
 import time
 import os
 import shutil
+import json
 
 from django.contrib.auth.models import User, Group
 from django.views.decorators.csrf import ensure_csrf_cookie, csrf_exempt
@@ -91,35 +92,40 @@ def submit_code(request, problem="two_sum"):
 @csrf_exempt
 def code_submit(request, problem_name):
     context = {}
-    queryset = Course.objects.all()
-    code = request.GET.get('code')
+    data = json.loads(request.body)
+    code = data['code']
+    print(code)
     data = {
             'result': 'Cannot get code'
             }
     # Let the front send the name of a problem. We want to use it to find the matching file.
-    if code != None:
-        root = str(Path.home()) + '/python/'
-        folder = current_milli_time()
-        solution = root + folder
-        os.makedirs(solution)
-        pre_code = "from solution_framework.solution import Solution\nimport sys\n\n"
-        post_code = "\n\nif __name__ == '__main__':\n    sol = Solution(1, sys.argv[1], 0.1)\n    result = sol.run(two_sum)\n    sys.stdout.flush()"
-        full_code = pre_code + code + post_code
-        with open(solution + '/two_sum.py', 'w') as f:
-            f.write(full_code)
-        # docker run --rm --volumes-from test test cp /$HOME/python/$TIME/two_sum.py /$HOME/python/solution/ && python /$HOME/python/solution/two_sum.py $TIME
-        cmd = "docker run --rm --volumes-from test test cp " + solution + "/two_sum.py " + root + "solution/ && python " + root + "solution/two_sum.py " + solution
-        subprocess.call(cmd, shell=True)
-        solution = "/Users/roland/python" # Testing
-        with open(solution + '/answer.log', 'r') as f:
-            ans = ""
-            for line in f:
-                ans += line
-            data['result'] = ans
-        shutil.rmtree(solution)
-    result = {"result": "Accept",
+    try:
+        if code != None:
+            root = str(Path.home()) + '/python/'
+            folder = current_milli_time()
+            solution = root + folder
+            os.makedirs(solution)
+            pre_code = "from solution_framework.solution import Solution\nimport sys\n\n"
+            post_code = "\n\nif __name__ == '__main__':\n    sol = Solution(1, sys.argv[1], 0.1)\n    result = sol.run(two_sum)\n    sys.stdout.flush()"
+            full_code = pre_code + code + post_code
+            with open(solution + '/two_sum.py', 'w') as f:
+                f.write(full_code)
+            # docker run --rm --volumes-from test test cp /$HOME/python/$TIME/two_sum.py /$HOME/python/solution/ && python /$HOME/python/solution/two_sum.py $TIME
+            cmd = "docker run --rm --volumes-from test test cp " + solution + "/two_sum.py " + root + "solution/ && python " + root + "solution/two_sum.py " + solution
+            subprocess.call(cmd, shell=True)
+            with open(solution + '/answer.log', 'r') as f:
+                ans = ""
+                for line in f:
+                    ans += line
+                data['result'] = ans
+            shutil.rmtree(solution)
+    except:
+        pass
+    # TODO: Change the dummy result in to a real one
+    result = {"result": "Result: Accept",
               "num_test_passed": "test passed: 17/17 tests",
-              "runtime": "Time: 987 ms",}
+              "runtime": "Time: 987 ms",
+              }
     return JsonResponse(result)
 
 def compileCode(request):

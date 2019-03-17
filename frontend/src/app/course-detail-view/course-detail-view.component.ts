@@ -11,7 +11,10 @@ import { DomSanitizer } from '@angular/platform-browser';
 })
 export class CourseDetailViewComponent implements OnInit {
 
-  id = -1;
+  id = "-1";
+  topic = "Default"
+  content = "None"
+  link = ""
 
   constructor(private api: ApiService, private route: ActivatedRoute, private sanitizer: DomSanitizer) {
     this.id = this.route.snapshot.paramMap.get('id');

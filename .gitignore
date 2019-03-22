@@ -6,3 +6,6 @@
 
 # cache
 ./classler/__pycache__
+
+# keys
+*.pem

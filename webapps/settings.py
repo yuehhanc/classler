@@ -25,11 +25,12 @@ SECRET_KEY = 'k*dg37f-or$kbg4w*!9n)^46ghmsh=3a=ze3&$2+ci6#dl58rg'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['18.218.159.63','classler-env.2fxhns4kpk.us-east-2.elasticbeanstalk.com','classler.us-east-2.elasticbeanstalk.com']
+ALLOWED_HOSTS = ['18.218.159.63','127.0.0.1','classler-env.2fxhns4kpk.us-east-2.elasticbeanstalk.com','classler.us-east-2.elasticbeanstalk.com']
 
 CORS_ORIGIN_WHITELIST = (
     'localhost:4200',
     '18.218.159.63:4200',
+    '127.0.0.1:4200',
 )
 
 # Application definition

@@ -29,6 +29,7 @@ ALLOWED_HOSTS = ['18.218.159.63','classler-env.2fxhns4kpk.us-east-2.elasticbeans
 
 CORS_ORIGIN_WHITELIST = (
     'localhost:4200',
+    '18.218.159.63:4200',
 )
 
 # Application definition

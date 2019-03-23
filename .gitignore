@@ -9,3 +9,6 @@
 
 # keys
 *.pem
+
+# shared_folders
+frontend_shared_folder

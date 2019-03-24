@@ -121,14 +121,13 @@ def code_submit(request, problem_name):
                     ans += line
                 data['result'] = ans
             shutil.rmtree(solution)
-    except:
-        pass
-    # TODO: Change the dummy result in to a real one
-    result = {"result": "Result: Accept",
-              "num_test_passed": "test passed: 17/17 tests",
-              "runtime": "Time: 987 ms",
+    except Exception as e:
+        data = {"result": "Result: " + str(e),
+              "num_test_passed": "test passed: 0/0 tests",
+              "runtime": "Time: N/A",
               }
-    return JsonResponse(result)
+    # TODO: Change the dummy result in to a real one
+    return JsonResponse(data)
 
 def compileCode(request):
     # Note

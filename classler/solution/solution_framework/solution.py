@@ -10,6 +10,7 @@ class Solution:
         self._num_passed = 0
 
     def run(self, func):
+        # Need to import data files as 2 lists
         data_set = [[[1,6,7,8,10],2],[[0,0,0],3]]
         answers = [False, True]
         if self._timeout_seconds == 0:

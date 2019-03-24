@@ -30,8 +30,8 @@ export class CourseDetailViewComponent implements OnInit {
     this.api.getOneCourse(this.id).subscribe(
       data => {
         this.topic = data.topic;
-        this.content = data.content;
-        this.link = data.link;
+        this.content = this.sanitizer.bypassSecurityTrustHtml(data.content);
+        this.video_rsc = this.sanitizer.bypassSecurityTrustResourceUrl(data.link);
       },
       error => {
         console.log(error);

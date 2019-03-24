@@ -3,11 +3,13 @@
   <div>
     <tabset>
       <tab heading="Course" id="tab1">
-        <iframe width="640" height="360" [src]="resource_url" frameborder="0"
+        <iframe width="640" height="360" [src]="video_rsc" frameborder="0"
           allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
       </tab>
-      <tab heading="Exercise 1">Basic content 1</tab>
-      <tab heading="Exercise 2">Basic content 2</tab>
+      <tab heading="Content">
+        <div [innerHTML]="content" align=center style="width: 600px"></div>
+      </tab>
+      <tab heading="Exercise">Basic content 2</tab>
     </tabset>
   </div>
 </div>

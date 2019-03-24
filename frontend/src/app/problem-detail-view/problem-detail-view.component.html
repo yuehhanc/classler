@@ -15,7 +15,11 @@
         </div>
         <div *ngIf="userCode">
           <h4>Result</h4>
-          <p>{{submitResult}}</p>
+          <p>
+              {{submitResult.result}}<br>
+              {{submitResult.num_test_passed}}<br>
+              {{submitResult.runtime}}<br>
+          </p>
         </div>
       </tab>
       <tab heading="Solution">Basic content 1</tab>

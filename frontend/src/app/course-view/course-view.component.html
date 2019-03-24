@@ -7,8 +7,8 @@
       <div class="card-body">
         <ul class="list-unstyled mt-3 mb-4">
           <li *ngFor='let course of course_names'>
-            <div routerLink="/courses/{{course}}">
-              {{course}}
+            <div routerLink="/courses/{{ course.id }}">
+              {{ course.topic }}
             </div>
           </li>
         </ul>

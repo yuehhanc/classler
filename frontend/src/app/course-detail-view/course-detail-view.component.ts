@@ -13,9 +13,10 @@ export class CourseDetailViewComponent implements OnInit {
 
   id = "-1";
   topic = "Data Structure Intro"
-  content = "This is a place-holder string for course description"
+  content
   link = "https://www.youtube.com/embed/FXoP4ZpJaZY"
   resource_url
+  video_src
 
   constructor(private api: ApiService, private route: ActivatedRoute, private sanitizer: DomSanitizer) {
     this.id = this.route.snapshot.paramMap.get('id');
@@ -31,7 +32,7 @@ export class CourseDetailViewComponent implements OnInit {
       data => {
         this.topic = data.topic;
         this.content = this.sanitizer.bypassSecurityTrustHtml(data.content);
-        this.video_rsc = this.sanitizer.bypassSecurityTrustResourceUrl(data.link);
+        this.video_src = this.sanitizer.bypassSecurityTrustResourceUrl(data.link);
       },
       error => {
         console.log(error);

@@ -13,3 +13,12 @@ Integrate Django with Angular.js
 2.pip install djangorestframework
 3.Install Angular.js
 4.Run Angular Single Page Server and let Django do data access using http
+
+AWS
+Angular:
+cd to frontend directory and type
+sudo ng serve --host 0.0.0.0 --port 4200
+
+Django
+cd to classler-env/classler and type
+python3 manage.py runserver 0.0.0.0:8000

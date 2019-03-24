@@ -3,6 +3,7 @@ from django.urls import path
 
 from django.conf.urls import include, url
 from django.contrib.auth import views as auth_views
+from django.views.generic.base import TemplateView
 from classler import views as classler_views
 
 from rest_framework import routers
@@ -12,7 +13,7 @@ router.register(r'courses', classler_views.CourseViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    url(r'^$', classler_views.home),
+    url(r'^.*', TemplateView.as_view(template_name="classler/home.html"), name="home"),
     url(r'^classler/', include('classler.urls')),
 
     path('', include(router.urls)),

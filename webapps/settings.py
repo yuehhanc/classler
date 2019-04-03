@@ -31,6 +31,7 @@ CORS_ORIGIN_WHITELIST = (
     'localhost:4200',
     '18.218.159.63:4200',
     '127.0.0.1:4200',
+    '18.222.175.39:4200',
 )
 
 # Application definition

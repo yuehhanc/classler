@@ -99,7 +99,7 @@ var ApiService = /** @class */ (function () {
     function ApiService(http) {
         this.http = http;
         //baseUrl = "http://127.0.0.1:8000";
-        this.baseUrl = "http://18.218.159.63:8000";
+        this.baseUrl = "http://18.222.175.39:8000";
         this.httpHeaders = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ "Content-Type": "application/json" });
     }
     ApiService.prototype.getAllCourses = function () {
@@ -357,7 +357,7 @@ var CodeSubmissionService = /** @class */ (function () {
     function CodeSubmissionService(http) {
         this.http = http;
         //baseUrl = "http://127.0.0.1:8000/classler/";
-        this.baseUrl = "http://18.218.159.63:8000/classler/";
+        this.baseUrl = "http://18.222.175.39:8000/classler/";
         this.httpHeaders = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ "Content-Type": "application/json" });
     }
     CodeSubmissionService.prototype.submit = function (problem_name, code_str) {

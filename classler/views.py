@@ -31,6 +31,7 @@ class CourseViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
 # Create your views here.
+@ensure_csrf_cookie
 def home(request):
     context = {}
     return render(request, 'classler/home.html', context)
@@ -60,7 +61,7 @@ def submit_code_demo(request, problem="two_sum"):
     return JsonResponse(data)
 
 @csrf_exempt
-def submit_code(request, problem):
+def submit_code(request, problem="two_sum"):
     context = {}
     code = request.GET.get('code')
     data = {
@@ -129,7 +130,7 @@ def code_submit(request, problem_name):
                     ans += line
                 data['result'] = ans
             shutil.rmtree(solution)
-    except Exception as e:
+    except Exception as ㄨe:
         data = {"result": "Result: " + str(e),
               "num_test_passed": "test passed: 0/0 tests",
               "runtime": "Time: N/A",

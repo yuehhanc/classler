@@ -60,6 +60,7 @@ def submit_code_demo(request, problem="two_sum"):
 
     return JsonResponse(data)
 
+@csrf_exempt
 def submit_code(request, problem="two_sum"):
     context = {}
     code = request.GET.get('code')

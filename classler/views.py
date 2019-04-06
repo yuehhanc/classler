@@ -123,7 +123,7 @@ def code_submit(request, problem_name):
                     ans += line
                 data['result'] = ans
             shutil.rmtree(solution)
-    except Exception as ㄨe:
+    except Exception as e:
         data = {"result": "Result: " + str(e),
               "num_test_passed": "test passed: 0/0 tests",
               "runtime": "Time: N/A",

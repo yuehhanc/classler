@@ -61,9 +61,11 @@ def submit_code_demo(request, problem="two_sum"):
     return JsonResponse(data)
 
 @csrf_exempt
-def submit_code(request, problem="two_sum"):
+def submit_code(request, problem_name):
     context = {}
-    code = request.GET.get('code')
+    data = json.loads(request.body)
+    code = data['code']
+    # code = request.GET.get('code')
     data = {
             'result': 'Cannot get code'
             }
@@ -75,7 +77,7 @@ def submit_code(request, problem="two_sum"):
             DOCKER_ROOT = '/home/ubuntu/python/'
             docker_solution = DOCKER_ROOT + folder
             solution = root + folder
-            print(getpass.getuser())
+            #print(getpass.getuser())
             os.makedirs(solution)
             pre_code = "from solution_framework.solution import Solution\nimport sys\n\n"
             post_code = "\n\nif __name__ == '__main__':\n    sol = Solution(1, sys.argv[1], 0.1)\n    result = sol.run(two_sum)\n    sys.stdout.flush()"
@@ -98,7 +100,7 @@ def submit_code(request, problem="two_sum"):
               }
     # TODO: Change the dummy result in to a real one
 
-    return Response(data)
+    return JsonResponse(data)
 
 @csrf_exempt
 def code_submit(request, problem_name):

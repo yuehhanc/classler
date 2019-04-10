@@ -13,7 +13,7 @@ const httpOptions = {
 })
 export class CodeSubmissionService {
 
-  baseUrl = "http://127.0.0.1:8000/classler/";
+  baseUrl = "/classler/";
   httpHeaders = new HttpHeaders({"Content-Type": "application/json"});
 
   constructor(private http: HttpClient, ) { }

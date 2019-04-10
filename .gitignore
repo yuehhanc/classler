@@ -12,3 +12,6 @@
 
 # shared_folders
 frontend_shared_folder
+
+# npm modules
+./frontend/node_modules

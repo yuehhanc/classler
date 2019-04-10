@@ -18,12 +18,10 @@
               <button mat-raised-button color="primary" (click)="submit()">Submit</button>
             </div>
             <div *ngIf="userCode">
-              <h4>Result</h4>
-              <p>
-                {{submitResult.result}}<br>
-                {{submitResult.num_test_passed}}<br>
-                {{submitResult.runtime}}<br>
-              </p>
+              <h4>Result:</h4>
+              <p>Output: {{submitResult.result}} </p>
+              <p> {{submitResult.num_test_passed}}</p>  
+              <p>{{submitResult.runtime}}</p>
             </div>
           </div>
  

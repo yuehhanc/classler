@@ -25,7 +25,7 @@ export class ProblemDetailViewComponent implements OnInit {
     theme: 'material',
     indentWithTabs: true,
     tabSize: 4,
-    value: "class Solution():\n\tdef __init__(self):\n\t\tpass\n\tdef run(self):\n",
+    value: "def two_sum(nums, target):\n",
   };
 
   userCode = '';

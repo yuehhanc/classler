@@ -1,15 +1,21 @@
-<div class="cover-container d-flex w-100 h-100 p-1 mx-auto flex-column">
-  <h1>{{ topic }}</h1>
-  <div>
-    <tabset>
-      <tab heading="Course" id="tab1">
-        <iframe width="640" height="360" [src]="video_src" frameborder="0"
-          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-      </tab>
-      <tab heading="Content">
-        <div [innerHTML]="content" align=center style="width: 600px"></div>
-      </tab>
-      <tab heading="Exercise">Basic content 2</tab>
-    </tabset>
+<div class="p-3" fxLayout='column' fxLayoutAlign="start center">
+  <div *ngIf="topic!=''">
+    <div class="p-3"><h2>{{ id }} / {{topic}}</h2></div>
   </div>
+  <div *ngIf="type=='video'" style="width:70%">
+    <div class="embed-responsive embed-responsive-16by9">
+      <iframe class="embed-responsive-item" [src]="resource_url" allowfullscreen></iframe>
+    </div>
+  </div>
+  <div *ngIf="type=='markdown'" style="width:50%">
+    <markdown class="text-left" [data]="content"></markdown>
+  </div>
+
+  <div *ngIf="course_index!=n-1" class="p-3">
+    <button mat-raised-button color="primary" [routerLink]="next.link">Next:  {{next.name}}</button>
+  </div>
+
+      
+
+
 </div>

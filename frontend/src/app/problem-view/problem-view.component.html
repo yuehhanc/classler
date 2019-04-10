@@ -1,19 +1,30 @@
-<h2> Problems </h2>
-<div>
-  <label>
-    <input (keyup)="onKey($event)" placeholder="Search problem titles or IDs" />
-  </label>
-</div>
+<div class="p-3" fxLayout='column' fxLayoutAlign="start center" style="min-height:90vh"e>
 
-<ul class="topics">
-  <li *ngFor="let item of selectedProblems">
-    <a routerLink="/problems/{{item.name}}">
-      <span class="badge">{{item.id}}</span> {{item.name}}
-    </a>
+    <!-- <div class="p-3"><h2>Classic 100 </h2></div> -->
+    <markdown class="text-left" [data]="intro" style="width:50%"></markdown>
 
-  </li>
-</ul>
+  <div style="width:50%" fxLayout='column' fxLayoutAlign="start stretch">
+      <mat-form-field class="example-full-width p-3">
+          <input matInput (keyup)="onKey($event)" placeholder="Search for challenge titles or IDs">
+        </mat-form-field>
+    
+    
+        <!-- <div class="p-3">
+        
+      <input (keyup)="onKey($event)" placeholder="Search for challenge titles or IDs" />
+    </div> -->
+    <mat-nav-list class="text-left">
+      <mat-list-item *ngFor="let item of selectedProblems">
+          <a matLine routerLink="/problems/{{item.name}}">{{item.id}}. {{item.name}} ({{item.topic}} Lv. {{item.level}})</a>
+      </mat-list-item>
+    </mat-nav-list>
 
-<div *ngIf="noMatched">
-  <h4>Can't find any matched problem...</h4>
+
+
+    <div *ngIf="noMatched">
+      <h4>Can't find any matched problem...</h4>
+    </div>
+  </div>
+  <br>
+
 </div>

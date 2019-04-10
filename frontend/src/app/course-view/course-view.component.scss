@@ -1,20 +1,21 @@
 
-  .card-deck .card {
-    min-width: 220px;
-    width: 50%;
-  }
+  // .card-deck .card {
+  //   // min-width: 220px;
+  //   // width: 50%;
+  //   height:100%;
+  // }
   
-  .my-0 {
-    color: black;
-  }
+  // .my-0 {
+  //   color: black;
+  // }
   
   li {
     position: relative;
     cursor: pointer;
     background-color: #EEE;
     color: black;
-    margin: .5em;
-    padding: .3em 0;
+    margin: 0.5em;
+    padding: .3em 2em 0em 2em ;
     height: 2em;
     font-size: 1.5em;
     border-radius: 4px;
@@ -28,7 +29,9 @@
   
   
   .card-body {
-    height:50vh;
-    overflow-y:scroll;
+    max-height: inherit;
+    height:60vh;
+    // height: 80%;
+    overflow-y:auto;
     width:100%;
   }

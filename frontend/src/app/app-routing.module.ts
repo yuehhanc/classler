@@ -10,12 +10,17 @@ import { AdsViewComponent } from './ads-view/ads-view.component';
 import { CourseDetailViewComponent } from './course-detail-view/course-detail-view.component';
 
 const routes: Routes = [
-  { path: 'courses', component: CourseViewComponent },
+  { path: 'courses', component: CourseViewComponent,
+    children: [
+      {path: '', redirectTo: 'Lecture Intro/', pathMatch: 'full' },
+      {path: ':id/:topic', component: CourseDetailViewComponent},
+    ]},
   { path: 'problems', component: ProblemViewComponent },
   { path: '', component: AdsViewComponent },
   { path: 'interview', component: InterviewViewComponent },
   { path: 'problems/:name', component: ProblemDetailViewComponent},
-  { path: 'courses/:id', component:CourseDetailViewComponent},
+  // { path: 'courses', component:AdsViewComponent, outlet:"sidebar"},
+  // { path: 'courses/:id', component:CourseDetailViewComponent},
 ];
  
 

@@ -27,8 +27,18 @@ import { CourseDetailViewComponent } from './course-detail-view/course-detail-vi
 
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { TabsModule } from 'ngx-bootstrap/tabs';
-
-
+import { AngularSplitModule } from 'angular-split';
+import { MarkdownModule } from 'ngx-markdown';
+import { MatTabsModule } from '@angular/material/tabs';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatListModule} from '@angular/material/list';
+import {MatButtonModule} from '@angular/material/button';
+import {MatExpansionModule} from '@angular/material/expansion';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import {NoopAnimationsModule} from '@angular/platform-browser/animations';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatInputModule} from '@angular/material/input';
 @NgModule({
   declarations: [
     AppComponent,
@@ -49,6 +59,17 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
     HttpClientModule,
     CollapseModule.forRoot(),
     TabsModule.forRoot(),
+    AngularSplitModule.forRoot(),
+    MarkdownModule.forRoot(),
+    MatTabsModule,
+    MatMenuModule,
+    MatListModule,
+    MatButtonModule,
+    NoopAnimationsModule,
+    MatExpansionModule,
+    FlexLayoutModule,
+    MatInputModule,
+    MatSidenavModule,
   ],
   providers: [
     CourseService, 

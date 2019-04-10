@@ -1,35 +1,48 @@
-<div *ngIf="selectedProblem">
+<div fxLayout='column' fxLayoutAlign="start center" style="min-height:92vh">
 
-  <h1>{{selectedProblem.info.id}}. {{selectedProblem.info.name}}</h1>
-  <div>
-    <tabset>
-      <tab heading="Problem">
-        <div [innerHTML]="selectedProblem.description" align=left style="width: 600px"></div>
-        <h4>Code:</h4>
-        <div class="ngx-codemirror mb-1" align=left style="width: 700px">
-          <ngx-codemirror [ngModel]="options.value" [options]="options" [autoFocus]=false [preserveScrollPosition]=true
-            (ngModelChange)="handleChange($event)"></ngx-codemirror>
+  <!-- <div class="p-3"><h2>{{selectedProblem.info.id}}. {{selectedProblem.info.name}} </h2></div> -->
+  <mat-tab-group style="width:100%" mat-align-tabs="center">
+      <mat-tab label="Problem">
+        <div fxLayout='row' fxLayoutAlign="center start" >
+          <div class="p-3 text-left" fxLayout='column' fxLayoutAlign="start stretch" style="width:45vw">
+            <markdown [data]="selectedProblem.description"></markdown>
+          </div>
+
+          <div class="p-3 text-left" fxLayout='column' fxLayoutAlign="start stretch" style="width:45vw">
+            <!-- <h4>Code:</h4> -->
+            <!-- <div class="ngx-codemirror mb-1"> -->
+              <ngx-codemirror [ngModel]="options.value" [options]="options" [autoFocus]=false [preserveScrollPosition]=true
+                (ngModelChange)="handleChange($event)"></ngx-codemirror>
+            <!-- </div> -->
+            <div>
+              <button mat-raised-button color="primary" (click)="submit()">Submit</button>
+            </div>
+            <div *ngIf="userCode">
+              <h4>Result</h4>
+              <p>{{submitResult}}</p>
+            </div>
+          </div>
+ 
         </div>
-        <div>
-          <button (click)="submit()">Submit</button>
+      </mat-tab>
+      <mat-tab label="Solution">
+        <div fxLayout='column' fxLayoutAlign="start center" >
+          <div class="p-3" style="width:50%">
+            <markdown class="text-left" [data]="selectedProblem.solution"></markdown>
+          </div>
         </div>
-        <div *ngIf="userCode">
-          <h4>Result</h4>
-          <p>
-              {{submitResult.result}}<br>
-              {{submitResult.num_test_passed}}<br>
-              {{submitResult.runtime}}<br>
-          </p>
-        </div>
-      </tab>
-      <tab heading="Solution">Basic content 1</tab>
-      <tab heading="Video">
-        <iframe width="640" height="360" [src]="resource_url" frameborder="0"
-          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-      </tab>
-      <tab heading="Discussion">Basic content 2</tab>
-      <tab heading="History">Basic content 2</tab>
-    </tabset>
-  </div>
+      </mat-tab>
+      <mat-tab label="Video">
+        Content 3
+      </mat-tab>
+      <mat-tab label="Discussion">
+        Content 3
+      </mat-tab>
+      <mat-tab label="History">
+        Content 3
+      </mat-tab>
+  </mat-tab-group>
 
 </div>
+
+

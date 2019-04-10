@@ -1,10 +1,6 @@
-<main role="main" class="inner cover">
-  <h1 class="cover-heading">Code with Classler.</h1>
-  <p class="lead">Classler is the best coding-skill learning website for users with no related experience. Featuring fasinating course, carefully designed problem set and real human interview practicing within a single interface.</p>
-  <p class="lead">
-    <a routerLink="/courses" class="btn btn-lg btn-secondary">Learn more</a>
-  </p>
-
-
-
-</main>
+<div class="p-3" fxLayout='column' fxLayoutAlign="center center" style="min-height:92vh;">
+  <div class="p-3" style="width:50%">
+    <markdown [data]="content" class="text-left"></markdown>
+    <button mat-raised-button color="primary" routerLink="/courses">Start now</button>
+  </div>
+</div>

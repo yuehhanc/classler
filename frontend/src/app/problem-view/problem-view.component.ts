@@ -13,6 +13,17 @@ export class ProblemViewComponent implements OnInit {
   allProblems: ProblemInfo[];
   selectedProblems: ProblemInfo[];
   noMatched: boolean;
+  intro=
+`
+## Classic 100
+
+We pick 100 most representative problems that covers all sorts of stuffs you should know about technical interview questions. The problems are ordered by their difficulty, and we provide detail text/video solution for every problem. After finishing all the problems here, you will have sufficient knowledge to handle most of the interview questions.
+
+Since these 100 problems include every topics that are related to data structure and algorithm, it is recommended to first take our intro courses or other ds/algo courses you like if you have little understandings about them.
+`
+
+
+
   constructor(private problemService: ProblemService) { }
 
   ngOnInit() {

@@ -22,7 +22,7 @@ export class ProblemDetailViewComponent implements OnInit {
     mode: 'python',
     indentUnit: 4,
     smartIndent: true,
-    theme: 'neat',
+    theme: 'material',
     indentWithTabs: true,
     tabSize: 4,
     value: "class Solution():\n\tdef __init__(self):\n\t\tpass\n\tdef run(self):\n",
@@ -30,7 +30,7 @@ export class ProblemDetailViewComponent implements OnInit {
 
   userCode = '';
   submitResult = '';
-
+  
   constructor(
     private route: ActivatedRoute,
     private problemService: ProblemService,

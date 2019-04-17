@@ -1,7 +1,7 @@
 <div id="inputArea">
     <div style="color: red;">{{ err_msg }}</div>
     <input type="text" name="username" placeholder="Username" [(ngModel)] = "input.username"><br>
-    <input type="text" name="password" placeholder="Password" [(ngModel)] = "input.password"><br>
+    <input type="password" name="password" placeholder="Password" [(ngModel)] = "input.password"><br>
     <button type="submit" (click)="login()"> Login </button><br>
     <a href="/signup"> Not a user? Sign up! </a>
 </div>

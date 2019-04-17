@@ -18,7 +18,7 @@ import { ProblemDetailViewComponent } from './problem-detail-view/problem-detail
 import { CourseService } from './course.service';
 import { ProblemService } from './problem.service';
 import { CodeSubmissionService } from './code-submission.service';
-
+import { UserService } from './user.service';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -39,6 +39,7 @@ import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatInputModule} from '@angular/material/input';
+import { LogoutComponent } from './logout/logout.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -50,6 +51,7 @@ import {MatInputModule} from '@angular/material/input';
     LoginPopupComponent,
     ProblemDetailViewComponent,
     CourseDetailViewComponent,
+    LogoutComponent,
   ],
   imports: [
     BrowserModule,
@@ -74,7 +76,8 @@ import {MatInputModule} from '@angular/material/input';
   providers: [
     CourseService, 
     ProblemService, 
-    CodeSubmissionService
+    CodeSubmissionService,
+    UserService
   ],
   bootstrap: [AppComponent]
 })

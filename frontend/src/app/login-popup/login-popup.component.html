@@ -1,3 +1,6 @@
-<p>
-  login-popup works!
-</p>
+<div id="inputArea">
+    <input type="text" name="username" placeholder="Username" [(ngModel)] = "input.username"><br>
+    <input type="text" name="password" placeholder="Password" [(ngModel)] = "input.password"><br>
+    <button type="submit" (click)="login()"> Login </button><br>
+    <a href="/signup"> Not a user? Sign up! </a>
+</div>

@@ -12,23 +12,10 @@ from django.contrib.auth.models import User, Group
 from django.views.decorators.csrf import ensure_csrf_cookie, csrf_exempt
 from django.http import HttpResponse, Http404
 from rest_framework import viewsets
-from .serializers import CourseSerializer, CourseMiniSerializer
+from .serializers import CourseSerializer, CourseMiniSerializer, UserSerializer
 from .models import Course
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-
-
-class CourseViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows users to be viewed or edited.
-    """
-    queryset = Course.objects.all()
-    serializer_class = CourseSerializer
-
-    def list(self, request, *arg, **kwargs):
-        courses = Course.objects.all()
-        serializer = CourseMiniSerializer(courses, many=True)
-        return Response(serializer.data)
 
 # Create your views here.
 @ensure_csrf_cookie

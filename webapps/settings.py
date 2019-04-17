@@ -32,6 +32,7 @@ CORS_ORIGIN_WHITELIST = (
     '18.218.159.63:4200',
     '127.0.0.1:4200',
     '18.222.175.39:4200',
+    'localhost:8000',
 )
 
 # Application definition
@@ -56,7 +57,10 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         # 'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
         'rest_framework.permissions.AllowAny',
-    ]
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+    ),
 }
 
 MIDDLEWARE = [

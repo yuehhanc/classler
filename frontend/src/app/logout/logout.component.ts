@@ -23,6 +23,7 @@ export class LogoutComponent implements OnInit {
     this.userService.logoutUser(this.parent.token).subscribe(
       response => {
         this.parent.login_status = 'Login';
+        this.parent.login_url = '/login';
         alert('Logout successfully!');
         this.router.navigate(['/login']);
       },

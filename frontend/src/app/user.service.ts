@@ -8,7 +8,8 @@ import { Observable, of } from 'rxjs';
 })
 export class UserService {
 
-  base_url = 'http://127.0.0.1:8000';
+  base_url = '';
+  csrf_token = this.getCSRFToken();
 
   constructor(private http:HttpClient) { }
 
@@ -21,6 +22,17 @@ export class UserService {
   }
 
   logoutUser(userData): Observable<any> {
-    return this.http.post(this.base_url + '/api/logout/', userData, { headers: {Authorization: userData} });
+    return this.http.post(this.base_url + '/api/logout/', userData, { headers: {Authorization: userData, 'X-CSRFToken': this.csrf_token} });
+  }
+
+  getCSRFToken() {
+    var cookies = document.cookie.split(";");
+    for (var i = 0; i < cookies.length; i++) {
+        if (cookies[i].startsWith("csrftoken=")) {
+            return cookies[i].substring("csrftoken=".length, cookies[i].length);
+        }
+    }
+    return "unknown";
   }
 }
+

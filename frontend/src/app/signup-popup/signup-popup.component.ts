@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup-popup',
@@ -11,7 +12,7 @@ export class SignupPopupComponent implements OnInit {
 
   register;
 
-  constructor(private userService: UserService ) { }
+  constructor(private userService: UserService, private router: Router ) { }
 
   ngOnInit() {
     this.register = {
@@ -24,7 +25,8 @@ export class SignupPopupComponent implements OnInit {
   signUp() {
     this.userService.signUp(this.register).subscribe(
       response => {
-        alert('User has been created!');
+        alert('Login with your new account!');
+        this.router.navigate(['/login']);
       },
       error => {
         console.log("error", error);

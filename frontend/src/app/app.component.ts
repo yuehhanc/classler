@@ -9,6 +9,7 @@ export class AppComponent implements OnInit {
   title = 'Classler';
   login_status = '';
   login_url = '';
+  token;
 
   constructor() {}
 

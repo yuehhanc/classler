@@ -20,7 +20,7 @@ export class LogoutComponent implements OnInit {
   }
 
   logout() {
-    this.userService.logoutUser(this.input).subscribe(
+    this.userService.logoutUser(this.parent.token).subscribe(
       response => {
         this.parent.login_status = 'Login';
         alert('Logout successfully!');

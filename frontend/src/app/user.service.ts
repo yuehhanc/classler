@@ -21,6 +21,6 @@ export class UserService {
   }
 
   logoutUser(userData): Observable<any> {
-    return this.http.post(this.base_url + '/api/logout/', userData);
+    return this.http.post(this.base_url + '/api/logout/', userData, { headers: {Authorization: userData} });
   }
 }

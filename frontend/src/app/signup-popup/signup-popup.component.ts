@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 export class SignupPopupComponent implements OnInit {
 
   register;
+  err_msg;;
 
   constructor(private userService: UserService, private router: Router ) { }
 
@@ -18,20 +19,29 @@ export class SignupPopupComponent implements OnInit {
     this.register = {
       username: '',
       password: '',
+      confirm_password: '',
       email: '',
     };
   }
 
   signUp() {
+    if (this.register.password != this.register.confirm_password) {
+      this.err_msg = "Passwords don't match!";
+      return;
+    }
+    if (this.register.password.length < 8) {
+      this.err_msg = "Password must be longer than 8 characters.";
+      return;
+    }
     this.userService.signUp(this.register).subscribe(
       response => {
         alert('Login with your new account!');
         this.router.navigate(['/login']);
       },
       error => {
+        this.err_msg = "Invalid email address.";
         console.log("error", error);
       }
     );
   }
-
 }

@@ -24,13 +24,26 @@ export class SignupPopupComponent implements OnInit {
     };
   }
 
+  validateEmail(mail) {
+    var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    if(mail.match(mailformat)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   signUp() {
+    if (this.register.password.length < 8) {
+      this.err_msg = "Password must be longer than 8 characters.";
+      return;
+    }
     if (this.register.password != this.register.confirm_password) {
       this.err_msg = "Passwords don't match!";
       return;
     }
-    if (this.register.password.length < 8) {
-      this.err_msg = "Password must be longer than 8 characters.";
+    if (!this.validateEmail(this.register.email)) {
+      this.err_msg = "Invalid email address!";
       return;
     }
     this.userService.signUp(this.register).subscribe(
@@ -39,7 +52,7 @@ export class SignupPopupComponent implements OnInit {
         this.router.navigate(['/login']);
       },
       error => {
-        this.err_msg = "Invalid email address.";
+        this.err_msg = "Username has been taken.";
         console.log("error", error);
       }
     );

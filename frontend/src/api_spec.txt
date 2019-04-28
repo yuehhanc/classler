@@ -1,0 +1,109 @@
+
+
+
+# get static resource map, a hierarchical JSON formatted resource_id dictionary
+# resource_id should be some hashed value for retrieving resource file
+    URL: /api/get_static_resource_map
+    Type: get
+    Input: None
+    Output: {
+        "home": resource_id_for_homepage_intro,
+        "courses": {
+            “class_order": id,
+            “course_name_1": {
+                "sub_1": id,
+                "sub_2": id,
+                ...
+                "sub_n": id
+            },
+            “course_name_n": {
+                "sub_1": id,
+                "sub_2": id,
+                ...
+                "sub_n": id
+            }
+        },
+        "problems": {
+            “problem_name_1": {
+                "sub_1": id,
+                "sub_2": id,
+                ...
+                "sub_n": id
+            },
+            “problem_name_n": {
+                "sub_1": id,
+                "sub_2": id,
+                ...
+                "sub_n": id
+            }
+        },
+        "maybe something else": {
+            "I don't know": id
+        }
+    }
+    
+# get resource given resource id 
+    URL: /api/get_static_resource/{resource_id}
+    Type: get
+    Input: None
+    Output: {
+        "type": "type_name"
+        "resource": some JSON object that match the type's requirements
+    }
+
+    Example1: 
+    {
+        "type": "plain markdown",
+        "resource": "markdown file in string"
+    }
+
+    Example2:
+    {
+        "type": "exercise (markdown with code)",
+        "resource": {
+            "markdown": "markdown string",
+            "code": "code snippet string"
+        }
+    }
+
+    Example3:
+    {
+        "type": "list"
+        "resource": [item1, item2, item3]
+    }
+
+# get user private resource map
+    URL: /api/get_user_resource_map
+    Type: post # not sure about this, can this also be a get function?
+    Input: {
+        "token": oauth token
+    }
+    Output: {
+        "something about this user": id
+    }
+    
+# get resource given resource id 
+    URL: /api/get_user_resource/{resource_id}
+    Type: get
+    Input: {
+        "token": oauth token
+    }
+    Output: {
+        "type": "type_name"
+        "resource": some JSON object that match the type's requirements
+    }
+
+# submit or run code
+    URL: /api/submit
+    Type: post
+    Input: {
+        "token": oauth_token,
+        "problem": some problem id,
+        "code": code to run
+        "run_type": "submit" or "run"
+    }
+    Output: {
+        results 
+    }
+
+

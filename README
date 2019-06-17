@@ -1,13 +1,3 @@
-Integrate Django with docker
-1.Initiate docker according to README in folder “setup”
-
-2.In setup/create_docker.sh, the path in the front of “:” is the path on your machine. On the other hand, the path in the rear of “:” is the path in docker.
-
-3.In setup/start_docker.sh, use the path in docker to find your files for executions.
-
-4.Put folder “python” at the path where your docker runs on your machine (the path in step 2)
-
-
 Integrate Django with Angular.js
 1.pip install django-cors-headers
 2.pip install djangorestframework
@@ -22,3 +12,4 @@ sudo ng serve --host 0.0.0.0 --port 4200
 Django
 cd to classler-env/classler and type
 sudo python3 manage.py runserver 0.0.0.0:8000
+

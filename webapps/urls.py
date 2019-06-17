@@ -10,4 +10,5 @@ urlpatterns = [
     url(r'^classler/', include('classler.urls')),
     url(r'^api/', include('api.urls')),
     url(r'^.*', TemplateView.as_view(template_name="classler/home.html"), name="home"),
+    url(r'^oauth/', include('social_django.urls', namespace='social')),
 ]

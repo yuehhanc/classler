@@ -40,6 +40,23 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatInputModule} from '@angular/material/input';
 import { LogoutComponent } from './logout/logout.component';
+
+//Google login
+import { SocialLoginModule, AuthServiceConfig } from "angularx-social-login";
+import { GoogleLoginProvider, FacebookLoginProvider } from "angularx-social-login";
+
+let config = new AuthServiceConfig([
+  {
+    id: GoogleLoginProvider.PROVIDER_ID,
+    provider: new GoogleLoginProvider("292126628689-8l0q40patlqbvp02nr566dk22qmud4p0.apps.googleusercontent.com")
+  },
+]);
+ 
+export function provideConfig() {
+  return config;
+}
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -72,12 +89,17 @@ import { LogoutComponent } from './logout/logout.component';
     FlexLayoutModule,
     MatInputModule,
     MatSidenavModule,
+    SocialLoginModule,
   ],
   providers: [
     CourseService, 
     ProblemService, 
     CodeSubmissionService,
-    UserService
+    UserService,
+    {
+      provide: AuthServiceConfig,
+      useFactory: provideConfig
+    }
   ],
   bootstrap: [AppComponent]
 })

@@ -10,6 +10,7 @@ export class AppComponent implements OnInit {
   login_status = '';
   login_url = '';
   token;
+  login_method = '';
 
   constructor() {}
 

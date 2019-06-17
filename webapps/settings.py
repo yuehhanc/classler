@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'classler',
     'api',
+    'social_django',
 ]
 
 REST_FRAMEWORK = {
@@ -73,6 +74,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'social_django.middleware.SocialAuthExceptionMiddleware',
 ]
 
 ROOT_URLCONF = 'webapps.urls'
@@ -88,10 +90,28 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
 ]
+
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.github.GithubOAuth2',
+    'social_core.backends.twitter.TwitterOAuth',
+    'social_core.backends.facebook.FacebookOAuth2',
+
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+LOGIN_URL = 'login'
+LOGOUT_URL = 'logout'
+# LOGIN_REDIRECT_URL = '/classler/'
+
+SOCIAL_AUTH_FACEBOOK_KEY = '416373542290600'
+SOCIAL_AUTH_FACEBOOK_SECRET = 'b3f96c73266b719e78234430fab6f78e' 
 
 WSGI_APPLICATION = 'webapps.wsgi.application'
 

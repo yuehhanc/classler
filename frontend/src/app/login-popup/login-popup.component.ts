@@ -4,6 +4,7 @@ import { AppComponent } from '../app.component';
 import { AuthService } from "angularx-social-login";
 import { SocialUser } from "angularx-social-login";
 import { GoogleLoginProvider } from "angularx-social-login";
+import { Router } from '@angular/router';
 declare var FB: any;
 
 @Component({
@@ -20,7 +21,7 @@ export class LoginPopupComponent implements OnInit {
   private user: SocialUser;
   private loggedIn: boolean;
 
-  constructor(@Inject(AppComponent) private parent: AppComponent, private userService: UserService, private authService: AuthService ) { }
+  constructor(@Inject(AppComponent) private parent: AppComponent, private userService: UserService, private router: Router, private authService: AuthService ) { }
 
   ngOnInit() {
     this.input = {
@@ -46,6 +47,12 @@ export class LoginPopupComponent implements OnInit {
        js.src = "https://connect.facebook.net/en_US/sdk.js";
        fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
+
+    // You may want to store these info into cookies or sessions to fix "Page change = lose data issue"
+    console.log(this.parent.login_status);s
+    if (this.parent.login_status === 'Logout') {
+      this.router.navigate(['/']);
+    }
   }
 
   login() {

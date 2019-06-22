@@ -20,8 +20,9 @@
             <div *ngIf="userCode">
               <h4>Result:</h4>
               <p>Output: {{submitResult.result}} </p>
-              <p> {{submitResult.num_test_passed}}</p>  
-              <p>{{submitResult.runtime}}</p>
+              <p>Pass: {{submitResult.pass_nr}}</p>  
+              <p>Total: {{submitResult.total}}</p>
+              <p>Time: {{submitResult.execution_time}}</p>
             </div>
           </div>
  

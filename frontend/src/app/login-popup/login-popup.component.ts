@@ -49,7 +49,7 @@ export class LoginPopupComponent implements OnInit {
     }(document, 'script', 'facebook-jssdk'));
 
     // You may want to store these info into cookies or sessions to fix "Page change = lose data issue"
-    console.log(this.parent.login_status);s
+    console.log(this.parent.login_status);
     if (this.parent.login_status === 'Logout') {
       this.router.navigate(['/']);
     }

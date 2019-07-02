@@ -40,25 +40,8 @@ export class LogoutComponent implements OnInit {
   }
 
   logout() {
-    if (this.parent.login_method === 'facebook') {
-      // For unknown reasons, 'this' won't work in FB API calls...
-      var rt = this.router;
-      var p = this.parent;
-      FB.getLoginStatus(function(response) {
-        if(response.status === 'connected') {
-          FB.logout(function(response) {
-            console.log('connected.');
-            alert('Logout successfully!');
-            p.login_status = 'Login';
-            p.login_url = '/login';
-            p.login_method = '';
-            rt.navigate(['/login']);
-          });
-        }
-      });
-    } else {
       
-      if (this.parent.login_method === 'google') {
+      if (this.parent.login_method === 'GOOGLE' || this.parent.login_method === 'FACEBOOK') {
         var rt = this.router;
         var p = this.parent;
         alert('Logout successfully!');
@@ -66,7 +49,7 @@ export class LogoutComponent implements OnInit {
         p.login_url = '/login';
         p.login_method = '';
         rt.navigate(['/login']);
-        console.log('Sign out google.');
+        //console.log('Sign out google.');
         this.authService.signOut();
         return;
       }
@@ -81,7 +64,7 @@ export class LogoutComponent implements OnInit {
           console.log("error", error);
         }
       );
-    }
+
 
   }
 

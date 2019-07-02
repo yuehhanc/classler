@@ -3,7 +3,7 @@ import { UserService } from '../user.service';
 import { AppComponent } from '../app.component';
 import { AuthService } from "angularx-social-login";
 import { SocialUser } from "angularx-social-login";
-import { GoogleLoginProvider } from "angularx-social-login";
+import { GoogleLoginProvider, FacebookLoginProvider } from "angularx-social-login";
 import { Router } from '@angular/router';
 declare var FB: any;
 
@@ -49,7 +49,7 @@ export class LoginPopupComponent implements OnInit {
     }(document, 'script', 'facebook-jssdk'));
 
     // You may want to store these info into cookies or sessions to fix "Page change = lose data issue"
-    console.log(this.parent.login_status);s
+    console.log(this.parent.login_status);
     if (this.parent.login_status === 'Logout') {
       this.router.navigate(['/']);
     }
@@ -83,8 +83,9 @@ export class LoginPopupComponent implements OnInit {
                 p.login_status = 'Logout';
                 p.login_url = '/logout';
                 p.token = 'Token ' + response.authResponse.accessToken;
-                console.log(p.token);
-                p.login_method='facebook';
+                console.log("token:" + p.token);
+                console.log("User ID: " + response.authResponse.userID);
+                p.login_method='FACEBOOK';
                 var inputArea = document.getElementById("inputArea");
 
                 FB.api('/me', function(response) {
@@ -101,25 +102,53 @@ export class LoginPopupComponent implements OnInit {
 
   signInWithGoogle(): void {
     this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
-    this.verify_login_state();
+    this.verify_login_state("GOOGLE");
+    this.authService.authState.subscribe((user) => {
+      this.user = user;
+      this.create_social_user(user);
+      console.log(this.user);
+    });
+
   }
+
+  signInWithFB(): void {
+    this.authService.signIn(FacebookLoginProvider.PROVIDER_ID);
+    this.verify_login_state("FACEBOOK");
+    this.authService.authState.subscribe((user) => {
+      this.user = user;
+      this.create_social_user(user);
+      console.log(this.user);
+    });
+  } 
 
   signOut(): void {
     this.authService.signOut();
   }
 
-  verify_login_state() {
+  verify_login_state(login_method) {
     this.authService.authState.subscribe((user) => {
       this.user = user;
       this.loggedIn = (user != null);
       if (this.loggedIn === true) {
         this.parent.login_status = 'Logout';
         this.parent.login_url = '/logout';
-        this.parent.login_method='google';
+        this.parent.login_method = login_method;
         var inputArea = document.getElementById("inputArea");
         inputArea.innerHTML = 'Welcome, ' + this.user.name + '!';
       }
     });
+  }
+
+  create_social_user(user) {
+    const body = {'user': user};
+    this.userService.createSocialUser(body).subscribe(
+      response => {
+        console.log('Register with Social User successfully!');
+      },
+      error => {
+        console.log('Fail to create a user.');
+      }
+    );
   }
 
 }

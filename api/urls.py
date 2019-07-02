@@ -15,6 +15,7 @@ urlpatterns = [
     url(r'^', include(router.urls)),
     url(r'login/', ObtainAuthToken.as_view()),
     url(r'^logout/', views.Logout.as_view()),
+    url(r'^create_social_user/', views.create_social_user, name='create_social_user'),
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]

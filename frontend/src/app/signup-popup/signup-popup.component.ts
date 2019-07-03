@@ -21,6 +21,8 @@ export class SignupPopupComponent implements OnInit {
       password: '',
       confirm_password: '',
       email: '',
+      first_name: '',
+      last_name: '',
     };
   }
 

@@ -14,6 +14,7 @@ export class UserService {
   constructor(private http:HttpClient) { }
 
   signUp(userData): Observable<any> {
+    console.log(userData);
     return this.http.post(this.base_url + '/api/users/', userData);
   }
 

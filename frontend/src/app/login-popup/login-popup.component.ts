@@ -143,7 +143,7 @@ export class LoginPopupComponent implements OnInit {
     const body = {'user': user};
     this.userService.createSocialUser(body).subscribe(
       response => {
-        console.log('Register with Social User successfully!');
+        //console.log('Register with Social User successfully!');
       },
       error => {
         console.log('Fail to create a user.');

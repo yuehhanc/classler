@@ -13,6 +13,7 @@ export class AppComponent implements OnInit {
   login_url = '';
   token;
   login_method = '';
+  user_id;
 
   private user: SocialUser;
   private loggedIn: boolean;

@@ -25,6 +25,25 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
 from rest_framework.views import APIView
 
+###
+from rest_framework.authtoken.views import ObtainAuthToken
+from rest_framework.authtoken.models import Token
+from rest_framework.response import Response
+
+class CustomAuthToken(ObtainAuthToken):
+
+    def post(self, request, *args, **kwargs):
+        serializer = self.serializer_class(data=request.data,
+                                           context={'request': request})
+        serializer.is_valid(raise_exception=True)
+        user = serializer.validated_data['user']
+        token, created = Token.objects.get_or_create(user=user)
+        return Response({
+            'token': token.key,
+            'user_id': 'BASE/' + str(user.pk),
+            'email': user.email,
+        })
+###
 
 class CourseViewSet(viewsets.ModelViewSet):
     """
@@ -67,6 +86,7 @@ def create_social_user(request):
     try:
         existed_user = EnhancedUser.objects.get(pk=new_user_id)
         if (existed_user):
+            context['user_id'] = existed_user.user_id
             return JsonResponse(context)
     except:
         pass
@@ -80,5 +100,24 @@ def create_social_user(request):
         created_time=timezone.now(),
         )
     new_enhanced_user.save()
-    
+    context['user_id'] = new_enhanced_user.user_id
     return JsonResponse(context)
+
+@csrf_exempt
+@transaction.atomic
+def purchase(request):
+    context = {}
+    data = json.loads(request.body)
+    user_id = data['user_id']
+    try:
+        existed_user = EnhancedUser.objects.get(pk=user_id)
+        authorized = (existed_user.authorization_level > 0)
+        if not authorized:
+            existed_user.authorization_level += 1
+            existed_user.save()
+            authorized = True
+        context['authorized'] = authorized
+        return JsonResponse(context)
+    except:
+        print("User doesn't exist!")
+        return

@@ -30,6 +30,10 @@ export class UserService {
     return this.http.post(this.base_url + '/api/create_social_user/', userData, { headers: {Authorization: userData, 'X-CSRFToken': this.csrf_token} });
   }
 
+  purchase(userData):  Observable<any> {
+    return this.http.post(this.base_url + '/api/purchase/', userData, { headers: {Authorization: userData, 'X-CSRFToken': this.csrf_token} });
+  }
+
   getCSRFToken() {
     var cookies = document.cookie.split(";");
     for (var i = 0; i < cookies.length; i++) {

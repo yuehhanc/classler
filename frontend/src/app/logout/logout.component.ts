@@ -64,8 +64,6 @@ export class LogoutComponent implements OnInit {
           console.log("error", error);
         }
       );
-
-
   }
 
 }

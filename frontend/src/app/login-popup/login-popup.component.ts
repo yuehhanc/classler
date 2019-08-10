@@ -59,9 +59,11 @@ export class LoginPopupComponent implements OnInit {
     var p = this.parent;
     this.userService.loginUser(this.input).subscribe(
       response => {
+        console.log(response);
         p.login_status = 'Logout';
         p.login_url = '/logout';
         p.token = 'Token ' + response.token;
+        p.user_id = response.user_id;
         var inputArea = document.getElementById("inputArea");
         inputArea.innerHTML = 'Welcome, ' + this.input.username + '!';
       },
@@ -144,10 +146,24 @@ export class LoginPopupComponent implements OnInit {
     this.userService.createSocialUser(body).subscribe(
       response => {
         //console.log('Register with Social User successfully!');
+        this.parent.user_id = response.user_id;
       },
       error => {
         console.log('Fail to create a user.');
       }
+    );
+  }
+
+  purchase() {
+      alert(this.parent.user_id);
+      const body = {'user_id': this.parent.user_id};
+      this.userService.purchase(body).subscribe(
+        response => {
+          console.log(response);
+        },
+        error => {
+          console.log('Fail to purchase.');
+        }
     );
   }
 

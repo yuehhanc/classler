@@ -13,9 +13,10 @@ router.register(r'users', views.UserViewSet)
 
 urlpatterns = [
     url(r'^', include(router.urls)),
-    url(r'login/', ObtainAuthToken.as_view()),
+    url(r'login/', views.CustomAuthToken.as_view()),
     url(r'^logout/', views.Logout.as_view()),
     url(r'^create_social_user/', views.create_social_user, name='create_social_user'),
+    url(r'^purchase/', views.purchase, name='purchase'),
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]

@@ -40,23 +40,24 @@ export class LogoutComponent implements OnInit {
   }
 
   logout() {
-      
-      if (this.parent.login_method === 'GOOGLE' || this.parent.login_method === 'FACEBOOK') {
+      if (!this.parent.login_method || this.parent.login_method === 'GOOGLE' || this.parent.login_method === 'FACEBOOK') {
         var rt = this.router;
         var p = this.parent;
         alert('Logout successfully!');
         p.login_status = 'Login';
         p.login_url = '/login';
         p.login_method = '';
-        rt.navigate(['/login']);
-        //console.log('Sign out google.');
+        this.clearLocalStorage();
+        alert('Sign out.');
         this.authService.signOut();
+        rt.navigate(['/login']);
         return;
       }
       this.userService.logoutUser(this.parent.token).subscribe(
         response => {
           this.parent.login_status = 'Login';
           this.parent.login_url = '/login';
+          this.clearLocalStorage();
           alert('Logout successfully!');
           this.router.navigate(['/login']);
         },
@@ -64,6 +65,13 @@ export class LogoutComponent implements OnInit {
           console.log("error", error);
         }
       );
+  }
+
+  clearLocalStorage() {
+    localStorage.setItem('loggedIn', 'false');
+    localStorage.removeItem('name');
+    localStorage.removeItem('authorized');
+    localStorage.removeItem('user_id');
   }
 
 }

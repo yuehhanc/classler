@@ -38,10 +38,19 @@ class CustomAuthToken(ObtainAuthToken):
         serializer.is_valid(raise_exception=True)
         user = serializer.validated_data['user']
         token, created = Token.objects.get_or_create(user=user)
+        user_id = 'BASE/' + str(user.pk)
+        authorized = False
+        print(user_id)
+        try:
+            existed_user = EnhancedUser.objects.get(pk=user_id)
+            authorized = (existed_user.authorization_level > 0)
+        except:
+            print('User not found!')
         return Response({
             'token': token.key,
-            'user_id': 'BASE/' + str(user.pk),
+            'user_id': user_id,
             'email': user.email,
+            'authorized': authorized,
         })
 ###
 
@@ -87,6 +96,7 @@ def create_social_user(request):
         existed_user = EnhancedUser.objects.get(pk=new_user_id)
         if (existed_user):
             context['user_id'] = existed_user.user_id
+            context['authorized'] = (existed_user.authorization_level > 0)
             return JsonResponse(context)
     except:
         pass
@@ -101,6 +111,7 @@ def create_social_user(request):
         )
     new_enhanced_user.save()
     context['user_id'] = new_enhanced_user.user_id
+    context['authorized'] = (new_enhanced_user.authorization_level > 0)
     return JsonResponse(context)
 
 @csrf_exempt
@@ -120,4 +131,4 @@ def purchase(request):
         return JsonResponse(context)
     except:
         print("User doesn't exist!")
-        return
+        return JsonResponse(context)

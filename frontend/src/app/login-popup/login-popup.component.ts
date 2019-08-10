@@ -29,7 +29,7 @@ export class LoginPopupComponent implements OnInit {
       password: '',
     };
     this.err_msg = '';
-
+    this.reverify_login();
     (window as any).fbAsyncInit = function() {
       FB.init({
         appId      : '416373542290600',
@@ -50,9 +50,9 @@ export class LoginPopupComponent implements OnInit {
 
     // You may want to store these info into cookies or sessions to fix "Page change = lose data issue"
     console.log(this.parent.login_status);
-    if (this.parent.login_status === 'Logout') {
-      this.router.navigate(['/']);
-    }
+    //if (this.parent.login_status === 'Logout') {
+    //  this.router.navigate(['/']);
+    //}
   }
 
   login() {
@@ -64,6 +64,7 @@ export class LoginPopupComponent implements OnInit {
         p.login_url = '/logout';
         p.token = 'Token ' + response.token;
         p.user_id = response.user_id;
+        p.authorized = response.authorized;
         var inputArea = document.getElementById("inputArea");
         inputArea.innerHTML = 'Welcome, ' + this.input.username + '!';
       },
@@ -108,7 +109,7 @@ export class LoginPopupComponent implements OnInit {
     this.authService.authState.subscribe((user) => {
       this.user = user;
       this.create_social_user(user);
-      console.log(this.user);
+      //console.log(this.user);
     });
 
   }
@@ -119,7 +120,7 @@ export class LoginPopupComponent implements OnInit {
     this.authService.authState.subscribe((user) => {
       this.user = user;
       this.create_social_user(user);
-      console.log(this.user);
+      //console.log(this.user);
     });
   } 
 
@@ -137,8 +138,19 @@ export class LoginPopupComponent implements OnInit {
         this.parent.login_method = login_method;
         var inputArea = document.getElementById("inputArea");
         inputArea.innerHTML = 'Welcome, ' + this.user.name + '!';
+        this.addLoginInfoToLocalStorage(this.user.name);
       }
     });
+  }
+
+  reverify_login() {
+    if (this.isLoggedIn()) {
+      this.parent.login_status = 'Logout';
+      this.parent.login_url = '/logout';
+      var inputArea = document.getElementById("inputArea");
+      var name = localStorage.getItem('name');
+      inputArea.innerHTML = 'Welcome, ' + name + '!';
+    }
   }
 
   create_social_user(user) {
@@ -147,6 +159,9 @@ export class LoginPopupComponent implements OnInit {
       response => {
         //console.log('Register with Social User successfully!');
         this.parent.user_id = response.user_id;
+        this.parent.authorized = response.authorized;
+        localStorage.setItem('authorized', response.authorized);
+        localStorage.setItem('user_id', response.user_id);
       },
       error => {
         console.log('Fail to create a user.');
@@ -165,6 +180,20 @@ export class LoginPopupComponent implements OnInit {
           console.log('Fail to purchase.');
         }
     );
+  }
+
+  isLoggedIn() {
+      return JSON.parse(localStorage.getItem('loggedIn') || 'false');
+  }
+
+  isAuthorized() {
+      alert('logged in? '+ this.isLoggedIn());
+      alert('authorized? ' + this.parent.authorized);
+  }
+
+  addLoginInfoToLocalStorage(name) {
+    localStorage.setItem('loggedIn', 'true');
+    localStorage.setItem('name', name);
   }
 
 }

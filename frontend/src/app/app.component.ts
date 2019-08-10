@@ -13,7 +13,11 @@ export class AppComponent implements OnInit {
   login_url = '';
   token;
   login_method = '';
+
   user_id;
+  authorized = false;
+
+  isLoggedIn = JSON.parse(localStorage.getItem('loggedIn') || 'false')
 
   private user: SocialUser;
   private loggedIn: boolean;
@@ -29,12 +33,12 @@ export class AppComponent implements OnInit {
 
 
     // Might need to use cookie or session
-    if (this.loggedIn) {
+    if (JSON.parse(localStorage.getItem('loggedIn') || 'false')) {
         this.login_status = 'Logout';
         this.login_url = '/logout';
-        this.login_method = this.user.provider;
-        var inputArea = document.getElementById("inputArea");
-        inputArea.innerHTML = 'Welcome, ' + this.user.name + '!';
+        //this.login_method = this.user.provider;
+        //var inputArea = document.getElementById("inputArea");
+        //inputArea.innerHTML = 'Welcome, ' + this.user.name + '!';
     } else {
       this.login_status = 'Login';
       this.login_url = '/login';

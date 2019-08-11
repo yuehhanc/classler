@@ -153,7 +153,7 @@ def getContent(request):
     return JsonResponse(context)
 
 @csrf_exempt
-def cencelSubscription(request):
+def cancelSubscription(request):
     context = {}
     data = json.loads(request.body)
     user_id = data['user_id']
@@ -169,3 +169,4 @@ def cencelSubscription(request):
     except:
         print("User doesn't exist!")
         return JsonResponse(context)
+

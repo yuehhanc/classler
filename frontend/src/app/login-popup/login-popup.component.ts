@@ -194,6 +194,7 @@ export class LoginPopupComponent implements OnInit {
       this.userService.cancelSubscription(body).subscribe(
         response => {
           console.log(response);
+          localStorage.setItem('authorized', response.authorized);
         },
         error => {
           console.log('Fail to cancel membership. Please try again.');

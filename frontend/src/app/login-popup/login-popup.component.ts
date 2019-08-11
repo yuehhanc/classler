@@ -65,6 +65,10 @@ export class LoginPopupComponent implements OnInit {
         p.token = 'Token ' + response.token;
         p.user_id = response.user_id;
         p.authorized = response.authorized;
+        localStorage.setItem('loggedIn', 'true');
+        localStorage.setItem('name', response.name);
+        localStorage.setItem('authorized', response.authorized);
+        localStorage.setItem('user_id', response.user_id);
         var inputArea = document.getElementById("inputArea");
         inputArea.innerHTML = 'Welcome, ' + this.input.username + '!';
       },
@@ -171,7 +175,8 @@ export class LoginPopupComponent implements OnInit {
 
   purchase() {
       alert(this.parent.user_id);
-      const body = {'user_id': this.parent.user_id};
+      var user_id = localStorage.getItem('user_id');
+      const body = {'user_id': user_id};
       this.userService.purchase(body).subscribe(
         response => {
           console.log(response);
@@ -181,14 +186,32 @@ export class LoginPopupComponent implements OnInit {
         }
     );
   }
+  
+  cancelSubscription() {
+      alert('Canceling...' + this.parent.user_id);
+      var user_id = localStorage.getItem('user_id');
+      const body = {'user_id': user_id};
+      this.userService.cancelSubscription(body).subscribe(
+        response => {
+          console.log(response);
+        },
+        error => {
+          console.log('Fail to cancel membership. Please try again.');
+        }
+    );
+  }
 
   isLoggedIn() {
       return JSON.parse(localStorage.getItem('loggedIn') || 'false');
   }
 
   isAuthorized() {
+      return JSON.parse(localStorage.getItem('authorized') || 'false');
+  }
+
+  showIsAuthorized() {
       alert('logged in? '+ this.isLoggedIn());
-      alert('authorized? ' + this.parent.authorized);
+      alert('authorized? ' + this.isAuthorized());
   }
 
   addLoginInfoToLocalStorage(name) {

@@ -14,7 +14,7 @@ export class UserService {
   constructor(private http:HttpClient) { }
 
   signUp(userData): Observable<any> {
-    console.log(userData);
+    //console.log(userData);
     return this.http.post(this.base_url + '/api/users/', userData);
   }
 
@@ -31,7 +31,17 @@ export class UserService {
   }
 
   purchase(userData):  Observable<any> {
+    console.log(this.csrf_token);
     return this.http.post(this.base_url + '/api/purchase/', userData, { headers: {Authorization: userData, 'X-CSRFToken': this.csrf_token} });
+  }
+
+  cancelSubscription(userData):  Observable<any> {
+    console.log(this.csrf_token);
+    return this.http.post(this.base_url + '/api/cancelSubscription/', userData, { headers: {Authorization: userData, 'X-CSRFToken': this.getCSRFToken()} });
+  }
+
+  getContent(userData): Observable<any> {
+    return this.http.post(this.base_url + '/api/getContent/', userData);
   }
 
   getCSRFToken() {

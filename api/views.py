@@ -40,10 +40,12 @@ class CustomAuthToken(ObtainAuthToken):
         token, created = Token.objects.get_or_create(user=user)
         user_id = 'BASE/' + str(user.pk)
         authorized = False
+        name = ''
         print(user_id)
         try:
             existed_user = EnhancedUser.objects.get(pk=user_id)
             authorized = (existed_user.authorization_level > 0)
+            name = existed_user.first_name
         except:
             print('User not found!')
         return Response({
@@ -51,6 +53,7 @@ class CustomAuthToken(ObtainAuthToken):
             'user_id': user_id,
             'email': user.email,
             'authorized': authorized,
+            'name': name,
         })
 ###
 
@@ -127,6 +130,40 @@ def purchase(request):
             existed_user.authorization_level += 1
             existed_user.save()
             authorized = True
+        context['authorized'] = authorized
+        return JsonResponse(context)
+    except:
+        print("User doesn't exist!")
+        return JsonResponse(context)
+
+@csrf_exempt
+def getContent(request):
+    context = {}
+    data = json.loads(request.body)
+    user_id = data['user_id']
+    try:
+        existed_user = EnhancedUser.objects.get(pk=user_id)
+        authorized = (existed_user.authorization_level > 0)
+        if authorized:
+            context['content'] = "Enjoy your premium content." # need to read text files from s3 and parse them into string to replace the default content
+        else:
+            context['content'] = "To unlock the content, join our premium membership."
+    except:
+        pass
+    return JsonResponse(context)
+
+@csrf_exempt
+def cencelSubscription(request):
+    context = {}
+    data = json.loads(request.body)
+    user_id = data['user_id']
+    try:
+        existed_user = EnhancedUser.objects.get(pk=user_id)
+        authorized = (existed_user.authorization_level > 0)
+        if authorized:
+            existed_user.authorization_level = 0
+            existed_user.save()
+            authorized = False
         context['authorized'] = authorized
         return JsonResponse(context)
     except:

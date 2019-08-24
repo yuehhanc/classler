@@ -95,6 +95,10 @@ def submit_code(request, problem_name):
 def code_submit(request, problem_name):
     context = {}
     data = json.loads(request.body)
+    ######################
+    # get user id
+    user_id = data['uid']
+    ######################
     code = data['code']
     print(code)
     data = {

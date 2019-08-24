@@ -19,8 +19,9 @@ export class CodeSubmissionService {
   constructor(private http: HttpClient, ) { }
 
 
-  submit(problem_name: string, code_str: string): Observable<any> {
-    const body = {name: problem_name, code: code_str};
+  submit(problem_name: string, code_str: string, user_id: string): Observable<any> {
+    const body = {name: problem_name, code: code_str, uid: user_id};
+    console.log(body);
     return this.http.post(this.baseUrl + "problems/" + problem_name + "/code-submit", body, {headers: this.httpHeaders});  
   }
 

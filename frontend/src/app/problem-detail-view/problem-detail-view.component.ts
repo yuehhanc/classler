@@ -50,8 +50,9 @@ export class ProblemDetailViewComponent implements OnInit {
 
   submit(): void {
     //console.log('User Code: \n' + this.userCode);
+    var user_id = localStorage.getItem('user_id');
     const name = this.route.snapshot.paramMap.get('name');
-    this.codeSubmissionService.submit(name, this.userCode)
+    this.codeSubmissionService.submit(name, this.userCode, user_id)
       .subscribe(item => this.submitResult = item);
   }
 

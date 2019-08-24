@@ -16,6 +16,7 @@ from django.http import HttpResponse, Http404
 from rest_framework import viewsets
 from .serializers import CourseSerializer, CourseMiniSerializer, UserSerializer
 from .models import Course
+from api.models import EnhancedUser
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 
@@ -54,6 +55,9 @@ def submit_code_demo(request, problem="two_sum"):
 
 @csrf_exempt
 def submit_code(request, problem_name):
+    # user_id_passing
+    # user_id = json.loads(request.body)['user_id']
+    # print(user_id)
     uid = "0"
     t = str(time.time())
     data = {

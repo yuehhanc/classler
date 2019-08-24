@@ -67,8 +67,10 @@ def submit_code(request, problem_name):
     # get user id
     user_id = json.loads(request.body)['uid']
     print(user_id)
+    problem_name = json.loads(request.body)['name']
+    print(problem_name)
     ######################
-    
+
     sqs_client = boto3.client('sqs')
     message = {}
     message['code'] = json.loads(request.body)['code']

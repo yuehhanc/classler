@@ -63,9 +63,16 @@ def submit_code(request, problem_name):
     data = {
         'result': 'Something wrong...'
     }
+    ######################
+    # get user id
+    user_id = json.loads(request.body)['uid']
+    print(user_id)
+    ######################
+    
     sqs_client = boto3.client('sqs')
     message = {}
     message['code'] = json.loads(request.body)['code']
+
     # TODO: use real uid
     message['uid'] = uid
     message['time'] = t
@@ -95,10 +102,6 @@ def submit_code(request, problem_name):
 def code_submit(request, problem_name):
     context = {}
     data = json.loads(request.body)
-    ######################
-    # get user id
-    user_id = data['uid']
-    ######################
     code = data['code']
     print(code)
     data = {

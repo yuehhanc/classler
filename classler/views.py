@@ -65,10 +65,15 @@ def submit_code(request, problem_name):
     }
     ######################
     # get user id
+<<<<<<< HEAD
     user_id = json.loads(request.body)['uid']
     print(user_id)
     problem_name = json.loads(request.body)['name']
     print(problem_name)
+=======
+    uid = str(json.loads(request.body)['uid'].split('/')[-1])
+    print(uid)
+>>>>>>> refine uid and increase the WaitTimeSeconds for sqs
     ######################
 
     sqs_client = boto3.client('sqs')
@@ -79,6 +84,7 @@ def submit_code(request, problem_name):
     message['uid'] = uid
     message['time'] = t
     message['host_queue'] = RESULT_QUEUE_URL
+    message['problem_num'] = 1 # TODO: use real problem id
     get_result_from_worker = False
     try:
         msg = sqs_client.send_message(QueueUrl=WORKER_QUEUE_URL,
@@ -86,7 +92,7 @@ def submit_code(request, problem_name):
         while not get_result_from_worker:
             msgs = sqs_client.receive_message(QueueUrl=RESULT_QUEUE_URL,
                                       MaxNumberOfMessages=1,
-                                      WaitTimeSeconds=1)
+                                      WaitTimeSeconds=2)
             if msgs and 'Messages' in msgs:
                 for msg in msgs['Messages']:
                     # make sure the msg is the one you want, and then delete it from the queue

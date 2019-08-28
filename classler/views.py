@@ -65,15 +65,10 @@ def submit_code(request, problem_name):
     }
     ######################
     # get user id
-<<<<<<< HEAD
-    user_id = json.loads(request.body)['uid']
-    print(user_id)
-    problem_name = json.loads(request.body)['name']
-    print(problem_name)
-=======
     uid = str(json.loads(request.body)['uid'].split('/')[-1])
     print(uid)
->>>>>>> refine uid and increase the WaitTimeSeconds for sqs
+    problem_name = json.loads(request.body)['name']
+    print(problem_name)
     ######################
 
     sqs_client = boto3.client('sqs')

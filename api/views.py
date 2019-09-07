@@ -38,7 +38,7 @@ class CustomAuthToken(ObtainAuthToken):
         serializer.is_valid(raise_exception=True)
         user = serializer.validated_data['user']
         token, created = Token.objects.get_or_create(user=user)
-        user_id = 'BASE/' + str(user.pk)
+        user_id = 'BASE_' + str(user.pk)
         authorized = False
         name = ''
         print(user_id)
@@ -94,7 +94,7 @@ def create_social_user(request):
     new_user = data['user']
     if not new_user:
         return JsonResponse(context)
-    new_user_id = new_user['provider'] + '/' + new_user['id']
+    new_user_id = new_user['provider'] + '_' + new_user['id']
     try:
         existed_user = EnhancedUser.objects.get(pk=new_user_id)
         if (existed_user):

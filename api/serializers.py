@@ -28,7 +28,7 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 
         if not new_user:
             return user
-        new_user_id = 'BASE' + '/' + str(user.id)
+        new_user_id = 'BASE' + '_' + str(user.id)
         try:
             existed_user = EnhancedUser.objects.get(pk=new_user_id)
             if (existed_user):

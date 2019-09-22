@@ -65,7 +65,7 @@ def submit_code(request, problem_name):
     }
     ######################
     # get user id
-    uid = str(json.loads(request.body)['uid'].split('/')[-1])
+    uid = str(json.loads(request.body)['uid'])
     print(uid)
     problem_name = json.loads(request.body)['name']
     print(problem_name)

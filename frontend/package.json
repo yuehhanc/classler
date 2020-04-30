@@ -31,7 +31,7 @@
     "codemirror": "^5.45.0",
     "core-js": "^2.5.4",
     "express-session": "^1.16.2",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "marked": "^0.6.2",
     "ngx-bootstrap": "^3.3.0",
     "ngx-markdown": "^7.1.5",
